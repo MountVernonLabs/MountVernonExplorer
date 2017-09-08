@@ -1,3 +1,4 @@
+// Setup the Open Street Map Viz
 var projection = ol.proj.get('EPSG:3857');
 var view = new ol.View({
   center: [0, 0],
@@ -20,12 +21,14 @@ var view = new ol.View({
     }),
     view: view
   });
+
+  // Enable geolocation tracking
   var geolocation = new ol.Geolocation({
       projection: map.getView().getProjection(),
       tracking: true,
       trackingOptions: {
         enableHighAccuracy: true,
-        maximumAge: 500
+        maximumAge: 2000
       }
     });
 
@@ -51,20 +54,21 @@ var view = new ol.View({
     map.addLayer(iconLayer);
 
 
-
+    // Grab Mount Vernon Locations API data
     var mvloc;
     $.getJSON("https://www.mountvernon.org/site/api/locations", function(jsonloc){
           mvloc = jsonloc;
         });
 
 
-
+    // When location changes perform these functions
     geolocation.on('change', function() {
       var pos = geolocation.getPosition();
       iconFeature.setGeometry(new ol.geom.Point(pos));
       view.setCenter(pos);
       var cord = ol.proj.transform([pos[0], pos[1]], 'EPSG:3857','EPSG:4326');
 
+      // Calculates distnace from one lat/long
       function calculateDistance(lat1, lon1, lat2, lon2, unit) {
               var radlat1 = Math.PI * lat1/180
               var radlat2 = Math.PI * lat2/180
@@ -81,14 +85,26 @@ var view = new ol.View({
               return dist
           }
 
+      // Go through all of the locations API returned data and calcualte disntace from current position
       for ( i = 0; i < mvloc.length; i++) {
-              mvloc[i]["distance"] = calculateDistance(cord[1],cord[0],mvloc[i]["latitude"],mvloc[i]["longitude"],"K");
+              mvloc[i]["distance"] = calculateDistance(cord[1],cord[0],mvloc[i]["latitude"],mvloc[i]["longitude"],"N");
       }
 
+      // calculate distance from Mount Vernon and if you are more than 4 miles out show a welcome splash screen
+      var distanceaway = calculateDistance(cord[1],cord[0],38.71028,-77.08623,"N");
+      $('#miles').text("You are currently "+Math.round(distanceaway * 10) / 10+" miles from Mount Vernon.");
+
+      if (distanceaway < 4){
+        $('#miles').text("Welcome");
+        $('#bounds').delay( 1000 ).fadeOut("slow");
+      }
+
+      // Sort locations array data based on new calculated positions
       mvloc.sort(function(a, b) {
           return a.distance - b.distance;
         });
 
+      // Display nearby locations in the UI
       $("#locations").html("");
       $.each(mvloc, function(i, field){
           $("#locations").append("<li>" + field.title + "</li>");
