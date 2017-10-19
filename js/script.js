@@ -28,7 +28,7 @@ var view = new ol.View({
       tracking: true,
       trackingOptions: {
         enableHighAccuracy: true,
-        maximumAge: 2000
+        maximumAge: 500
       }
     });
 
@@ -94,10 +94,10 @@ var view = new ol.View({
       var distanceaway = calculateDistance(cord[1],cord[0],38.71028,-77.08623,"N");
       $('#miles').text("You are currently "+Math.round(distanceaway * 10) / 10+" miles from Mount Vernon.");
 
-      if (distanceaway < 4){
+      //if (distanceaway < 3){
         $('#miles').text("Welcome");
         $('#bounds').delay( 1000 ).fadeOut("slow");
-      }
+      //}
 
       // Sort locations array data based on new calculated positions
       mvloc.sort(function(a, b) {
@@ -107,7 +107,17 @@ var view = new ol.View({
       // Display nearby locations in the UI
       $("#locations").html("");
       $.each(mvloc, function(i, field){
-          $("#locations").append("<li>" + field.title + "</li>");
+          $("#locations").append("<div class=\"list\">");
+          if (field.distance > 1){
+            $("#locations").append("<div class=\"feet\">"+Math.round(field.distance * 10) / 10+"<br>miles</div>");
+          } else {
+            $("#locations").append("<div class=\"feet\">"+Math.round(field.distance*5280)+"<br>feet</div>");
+          }
+
+          $("#locations").append("<div class=\"list-image\"><img src=\"" + field.image + "\"></div>");
+          $("#locations").append("<p class=\"list-name\">"+field.title+"</p>");
+          $("#locations").append("</div>");
+          $("#locations").append("<div style=\"clear: both;\"></div>");
       });
 
     });
