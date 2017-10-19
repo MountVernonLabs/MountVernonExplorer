@@ -92,11 +92,11 @@ var view = new ol.View({
 
       // calculate distance from Mount Vernon and if you are more than 4 miles out show a welcome splash screen
       var distanceaway = calculateDistance(cord[1],cord[0],38.71028,-77.08623,"N");
-      $('#miles').text("You are currently "+Math.round(distanceaway * 10) / 10+" miles from Mount Vernon.");
+      //$('#miles').text("You are currently "+Math.round(distanceaway * 10) / 10+" miles from Mount Vernon.");
 
       //if (distanceaway < 3){
-        $('#miles').text("Welcome");
-        $('#bounds').delay( 1000 ).fadeOut("slow");
+        //$('#miles').text("Welcome");
+        //$('#bounds').delay( 1000 ).fadeOut("slow");
       //}
 
       // Sort locations array data based on new calculated positions
@@ -105,19 +105,17 @@ var view = new ol.View({
         });
 
       // Display nearby locations in the UI
-      $("#locations").html("");
+      $("#locations-list").html("");
       $.each(mvloc, function(i, field){
-          $("#locations").append("<div class=\"list\">");
+          $("#locations-list").append("<tr class=\"uk-padding-remove\">");
+          $("#locations-list").append("<td class=\"uk-padding-small\"><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></td>");
+          $("#locations-list").append("<td class=\"uk-text-bold uk-padding-small\">"+field.title+"</td>");
           if (field.distance > 1){
-            $("#locations").append("<div class=\"feet\">"+Math.round(field.distance * 10) / 10+"<br>miles</div>");
+            $("#locations-list").append("<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance * 10) / 10+"</span><br>miles</td>");
           } else {
-            $("#locations").append("<div class=\"feet\">"+Math.round(field.distance*5280)+"<br>feet</div>");
+            $("#locations-list").append("<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance*5280)+"</span><br>feet</td>");
           }
-
-          $("#locations").append("<div class=\"list-image\"><img src=\"" + field.image + "\"></div>");
-          $("#locations").append("<p class=\"list-name\">"+field.title+"</p>");
-          $("#locations").append("</div>");
-          $("#locations").append("<div style=\"clear: both;\"></div>");
+          $("#locations-list").append("</tr>");
       });
 
     });

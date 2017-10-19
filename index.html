@@ -4,84 +4,51 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
 
     <title>Mount Vernon Geolocation Prototype</title>
-
-    <link rel="stylesheet" href="bower_components/uikit/css/uikit.min.css" />
-    <script src="bower_components/uikit/js/jquery.js"></script>
-    <script src="bower_components/uikit/js/uikit.min.js"></script>
-    <script src="bower_components/uikit/js/uikit-icons.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="./lib/uikit/css/uikit.min.css" />
     <link rel="stylesheet" href="./lib/ol/ol.css" type="text/css">
-    <link rel="stylesheet" href="./css/style.css" type="text/css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./css/style.css?v1.4" type="text/css">
+    <script src="./lib/uikit/js/uikit.min.js"></script>
+    <script src="./lib/uikit/js/uikit-icons.min.js"></script>
     <script src="./lib/ol/ol.js"></script>
   </head>
   <body>
-    <nav class="uk-navbar-container" uk-navbar>
-
-        <div class="uk-navbar-left">
-
-            <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#">Active</a></li>
-                <li>
-                    <a href="#">Parent</a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li class="uk-active"><a href="#">Active</a></li>
-                            <li><a href="#">Item</a></li>
-                            <li><a href="#">Item</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="#">Item</a></li>
-            </ul>
-
-        </div>
-
-        <div class="uk-navbar-right">
-
-            <ul class="uk-navbar-nav">
-                <li class="uk-active"><a href="#">Active</a></li>
-                <li>
-                    <a href="#">Parent</a>
-                    <div class="uk-navbar-dropdown">
-                        <ul class="uk-nav uk-navbar-dropdown-nav">
-                            <li class="uk-active"><a href="#">Active</a></li>
-                            <li><a href="#">Item</a></li>
-                            <li><a href="#">Item</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="#">Item</a></li>
-            </ul>
-
-        </div>
-
-    </nav>
-
-
-    <div class="uk-section uk-section-default uk-width-1-1">
-      <div id="bounds">
-        <div class="logo">
-          <img src="img/mv-logo.png" width="200">
-        </div>
-        <p id="miles"></p>
-        <div class="tickets">
-          <p>
-            <a href="http://www.mountvernon.org/tickets/" class="button red">Buy Tickets</a>
-          </p>
-          <p>
-            <a href="http://www.mountvernon.org/directions/" class="underline">Get Directions</a>
-          </p>
-        </div>
+    <!-- Header -->
+    <div class="logo">
+      <img src="./img/mv-logo-color.png">
+    </div>
+    <div class="uk-container">
+      <div class="nav">
+        <a href="#offcanvas-slide" uk-icon="icon: menu" uk-toggle class="uk-padding-small"></a>
       </div>
-      <div id="map" class="uk-container uk-width-1-1"></div>
-      <div id="info" class="uk-container uk-width-1-1">
-        <h3>What's Nearby</h3>
+      <div id="map"></div>
+      <div id="info">
+        <p class="uk-text-uppercase uk-text-bold">What's Nearby</h3>
         <div id="locations">
+          <table class="uk-table uk-table-divider uk-table-small uk-table-justify">
+            <tbody id="locations-list" class="uk-padding-small">
+              <!-- Locations get populated here -->
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    <script src="./js/script.js"></script>
+
+
+    <!-- Menu -->
+    <div id="offcanvas-slide" uk-offcanvas>
+        <div class="uk-offcanvas-bar mv-nav">
+            <ul class="uk-nav uk-nav-default">
+                <li class="uk-active"><a href="#">Active</a></li>
+                <li><a href="#">Item</a></li>
+                <li class="uk-nav-header">Header</li>
+                <li><a href="#">Item</a></li>
+                <li><a href="#">Item</a></li>
+                <li class="uk-nav-divider"></li>
+                <li><a href="#">Item</a></li>
+            </ul>
+        </div>
+    </div>
+    <script src="./js/script.js?v1.9"></script>
   </body>
 </html>

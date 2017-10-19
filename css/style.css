@@ -1,16 +1,20 @@
-
-
-#bounds {
-  position: absolute;
-  height: 100%;
-  width: 80%;
-  background: #002C3D;
-  color: #fff;
-  padding: 10%;
-  z-index: 999;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
-  text-align: center;
-  /* Temporarily disables welcome screen */
+.nav, body, html {
+  background-color: #ece9e0;
+}
+.ol-attribution {
   display: none;
+}
+.logo {
+  height: 24px;
+  position: absolute;
+  text-align: center;
+  width: 150px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+}
+.logo img {
+  height: 100%;
 }
