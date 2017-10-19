@@ -4,6 +4,12 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
 
     <title>Mount Vernon Geolocation Prototype</title>
+
+    <link rel="stylesheet" href="bower_components/uikit/css/uikit.min.css" />
+    <script src="bower_components/uikit/js/jquery.js"></script>
+    <script src="bower_components/uikit/js/uikit.min.js"></script>
+    <script src="bower_components/uikit/js/uikit-icons.min.js"></script>
+
     <link rel="stylesheet" href="./lib/ol/ol.css" type="text/css">
     <link rel="stylesheet" href="./css/style.css" type="text/css">
 
@@ -11,7 +17,50 @@
     <script src="./lib/ol/ol.js"></script>
   </head>
   <body>
-    <div id="container">
+    <nav class="uk-navbar-container" uk-navbar>
+
+        <div class="uk-navbar-left">
+
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Active</a></li>
+                <li>
+                    <a href="#">Parent</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li class="uk-active"><a href="#">Active</a></li>
+                            <li><a href="#">Item</a></li>
+                            <li><a href="#">Item</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">Item</a></li>
+            </ul>
+
+        </div>
+
+        <div class="uk-navbar-right">
+
+            <ul class="uk-navbar-nav">
+                <li class="uk-active"><a href="#">Active</a></li>
+                <li>
+                    <a href="#">Parent</a>
+                    <div class="uk-navbar-dropdown">
+                        <ul class="uk-nav uk-navbar-dropdown-nav">
+                            <li class="uk-active"><a href="#">Active</a></li>
+                            <li><a href="#">Item</a></li>
+                            <li><a href="#">Item</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="#">Item</a></li>
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <div class="uk-section uk-section-default uk-width-1-1">
       <div id="bounds">
         <div class="logo">
           <img src="img/mv-logo.png" width="200">
@@ -26,8 +75,8 @@
           </p>
         </div>
       </div>
-      <div id="map" class="map"></div>
-      <div id="info">
+      <div id="map" class="uk-container uk-width-1-1"></div>
+      <div id="info" class="uk-container uk-width-1-1">
         <h3>What's Nearby</h3>
         <div id="locations">
         </div>
