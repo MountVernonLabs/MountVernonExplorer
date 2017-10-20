@@ -108,7 +108,7 @@ var view = new ol.View({
       $("#locations-list").html("");
       $.each(mvloc, function(i, field){
           $("#locations-list").append("<tr class=\"uk-padding-remove\">");
-          $("#locations-list").append("<td class=\"uk-padding-small\"><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></td>");
+          $("#locations-list").append("<td class=\"uk-padding-small\"><a href=\"#my-id\" uk-toggle><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></a></td>");
           $("#locations-list").append("<td class=\"uk-text-bold uk-padding-small\">"+field.title+"</td>");
           if (field.distance > 1){
             $("#locations-list").append("<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance * 10) / 10+"</span><br>miles</td>");
