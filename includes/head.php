@@ -5,3 +5,15 @@
 <script src="./lib/uikit/js/uikit.min.js"></script>
 <script src="./lib/uikit/js/uikit-icons.min.js"></script>
 <script src="./lib/ol/ol.js"></script>
+
+<?php
+
+function prefixURL($url,$prefix){
+  $path = parse_url($url, PHP_URL_PATH);
+  $expand = explode("/",$path);
+  $file = end($expand);
+  $base = str_replace($file,"",$url);
+  return $base.$prefix.$file;
+}
+
+ ?>

@@ -26,6 +26,11 @@
   object-fit: cover;
   max-height: 70px;
 }
+.mv-plant-image img {
+  width: 150px;
+  object-fit: cover;
+  height: 70px;
+}
 #locations {
   max-width: 450px;
 }
