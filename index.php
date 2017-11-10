@@ -37,18 +37,18 @@ ini_set('display_errors', 1);
         $locations = json_decode($locations_data, true);
         foreach($locations as $location){
       ?>
-      <div id="location<?=$location["id"]?>" class="uk-modal-full" uk-modal>
+      <div id="location<?php echo $location["id"]?>" class="uk-modal-full" uk-modal>
           <div class="uk-modal-dialog" uk-height-viewport>
               <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
               <div class="uk-padding-large">
-                  <h3><?=$location["title"]?></h3>
-                  <img src="<?=$location["image"]?>">
-                  <p><?=$location["content"]?></p>
+                  <h3><?php echo $location["title"]?></h3>
+                  <img src="<?php echo $location["image"]?>">
+                  <p><?php echo $location["content"]?></p>
                   <a href="">Learn More</a>
               </div>
           </div>
       </div>
-      <? } ?>
+      <?php  } ?>
     </div>
 
     <!-- Menu -->
