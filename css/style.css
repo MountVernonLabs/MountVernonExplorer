@@ -34,3 +34,7 @@
 #locations {
   max-width: 450px;
 }
+
+.layered_image {position: relative; top: 0; left: 0;}
+.layered_image img {position: absolute; top: 0; left: 0;}
+.layered_image img.base {position: relative;}
