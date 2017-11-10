@@ -17,15 +17,15 @@ ini_set('display_errors', 1);
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
 
-      <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+      <ul class="uk-subnav uk-subnav-pill uk-margin-remove-top" uk-switcher>
         <li><a href="#" onclick="document.getElementById('dg').src += ''">Distillery & Gristmill</a></li>
         <li><a href="#" onclick="document.getElementById('pfw').src += ''">Wharf</a></li>
       </ul>
 
     <ul class="uk-switcher uk-margin-remove" style="font-size: 1px !important;">
-      <li><iframe id="dg" class="shuttle uk-responsive-width t_iframe uk-width-1-1" src="https://www.mountvernon.org/site/shuttle-tracker/distillery-gristmill/" style="height: 400px" scrolling="no"></iframe>
+      <li><iframe id="dg" class="shuttle t_iframe uk-width-1-1 uk-height-large" src="https://www.mountvernon.org/site/shuttle-tracker/distillery-gristmill/" scrolling="no"></iframe>
       </li>
-      <li><iframe id="pfw" class="shuttle uk-responsive-width t_iframe uk-width-1-1" src="https://www.mountvernon.org/site/shuttle-tracker/wharf/" style="height: 400px" scrolling="no"></iframe>
+      <li><iframe id="pfw" class="shuttle t_iframe uk-width-1-1 uk-height-large" src="https://www.mountvernon.org/site/shuttle-tracker/wharf/" scrolling="no"></iframe>
       </li>
     </ul>
     </div>
