@@ -8,7 +8,7 @@ ini_set('display_errors', 1);
   <head>
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
 
-    <title>Shuttle Services at Mount Vernon</title>
+    <title>Shuttle Tracker - Mount Vernon Explorer</title>
     <?php include "includes/head.php"; ?>
   </head>
   <body>
