@@ -34,6 +34,12 @@
 #locations {
   max-width: 450px;
 }
+.mv-menu {
+background: #002C3D;
+}
+.uk-button-danger {
+  background-color: #8D2838 !important;
+}
 
 .layered_image {position: relative; top: 0; left: 0;}
 .layered_image img {position: absolute; top: 0; left: 0;}
