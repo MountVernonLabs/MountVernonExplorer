@@ -26,6 +26,21 @@
   object-fit: cover;
   max-height: 70px;
 }
+.mv-plant-image img {
+  width: 150px;
+  object-fit: cover;
+  height: 70px;
+}
 #locations {
   max-width: 450px;
 }
+.mv-menu {
+background: #002C3D;
+}
+.uk-button-danger {
+  background-color: #8D2838 !important;
+}
+
+.layered_image {position: relative; top: 0; left: 0;}
+.layered_image img {position: absolute; top: 0; left: 0;}
+.layered_image img.base {position: relative;}
