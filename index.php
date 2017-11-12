@@ -17,8 +17,8 @@ ini_set('display_errors', 1);
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
       <div id="map"></div>
-      <div id="info">
-        <p class="uk-text-uppercase uk-text-bold uk-padding-small uk-padding-remove-bottom">
+      <div id="info" class="uk-padding-remove">
+        <p class="uk-text-uppercase uk-text-bold uk-padding-small uk-padding-remove-bottom uk-margin-remove-bottom">
           <span class="uk-margin-right">Nearby Items</span>
           <select id="explore-filter">
             <option value="" selected>Show All</option>
@@ -32,7 +32,7 @@ ini_set('display_errors', 1);
           </select>
           <a uk-icon="icon: question" class="uk-float-right"></a>
         </p>
-        <div id="locations">
+        <div id="locations" class="uk-padding-small uk-padding-remove-top">
           <table class="uk-table uk-table-divider uk-table-small uk-table-justify uk-padding-remove-top">
             <tbody id="locations-list" class="uk-padding-small">
               <!-- Locations get populated here -->
