@@ -168,7 +168,7 @@ ini_set('display_errors', 1);
                         <ul class="uk-slideshow-items">
                             <li>
                               <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                <img src="<?php echo $plant["main_photo"]?>" alt="" uk-cover>
+                                <img src="<?php echo prefixURL($plant["main_photo"], "sml_")?>" alt="" uk-cover>
                               </div>
                             </li>
                               <?php
@@ -177,7 +177,7 @@ ini_set('display_errors', 1);
                               ?>
                                 <li>
                                   <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                    <img src="<?php echo $gimage["image"]?>" alt="" uk-cover>
+                                    <img src="<?php echo prefixURL($gimage["image"], "sml_")?>" alt="" uk-cover>
                                   </div>
                                 </li>
                               <?php  } ?>
