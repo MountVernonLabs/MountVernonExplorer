@@ -18,7 +18,9 @@ var view = new ol.View({
       attributionOptions: /** @type {olx.control.AttributionOptions} */ ({
         collapsible: false
       })
-    }),
+    }).extend([
+      new ol.control.FullScreen()
+    ]),
     view: view
   });
 

@@ -30,7 +30,7 @@ ini_set('display_errors', 1);
             <option value="service">Service Desks</option>
             <option value="project">Restoration Projects</option>
           </select>
-          <a href="" uk-icon="icon: question" class="uk-float-right"></a>
+          <a uk-icon="icon: question" class="uk-float-right"></a>
         </p>
         <div id="locations">
           <table class="uk-table uk-table-divider uk-table-small uk-table-justify uk-padding-remove-top">
@@ -66,6 +66,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.21"></script>
+    <script src="./js/script.js?v2.38"></script>
   </body>
 </html>

@@ -44,3 +44,20 @@ background: #002C3D;
 .layered_image {position: relative; top: 0; left: 0;}
 .layered_image img {position: absolute; top: 0; left: 0;}
 .layered_image img.base {position: relative;}
+
+#map:-moz-full-screen {
+  height: 100%;
+  width: 100%;
+}
+#map:-webkit-full-screen {
+  height: 100%;
+  width: 100%;
+}
+#map:-ms-fullscreen {
+  height: 100%;
+  width: 100%;
+}
+#map:fullscreen {
+  height: 100%;
+  width: 100%;
+}
