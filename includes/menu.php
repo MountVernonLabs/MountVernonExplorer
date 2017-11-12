@@ -27,6 +27,9 @@
             <button class="uk-button uk-button-danger">Buy Tickets</button>
           </a>
         </p>
-
+        <p>
+          <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: phone"></span>
+          <a href="tel:17037802000" class="uk-padding-remove-top">Call Mount Vernon</a>
+        </p>
     </div>
 </div>

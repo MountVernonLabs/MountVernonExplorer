@@ -18,7 +18,20 @@ ini_set('display_errors', 1);
       <?php include "includes/nav.php"; ?>
       <div id="map"></div>
       <div id="info">
-        <p class="uk-text-uppercase uk-text-bold uk-padding-small uk-padding-remove-bottom">What's Nearby</h3>
+        <p class="uk-text-uppercase uk-text-bold uk-padding-small uk-padding-remove-bottom">
+          <span class="uk-margin-right">Nearby Items</span>
+          <select id="explore-filter">
+            <option value="" selected>Show All</option>
+            <option value="stucture">Building</option>
+            <option value="restroom">Restrooms</option>
+            <option value="retail">Food & Retail</option>
+            <option value="transportation">Transportation</option>
+            <option value="water">Water Fountains</option>
+            <option value="service">Service Desks</option>
+            <option value="project">Restoration Projects</option>
+          </select>
+          <a href="" uk-icon="icon: question" class="uk-float-right"></a>
+        </p>
         <div id="locations">
           <table class="uk-table uk-table-divider uk-table-small uk-table-justify uk-padding-remove-top">
             <tbody id="locations-list" class="uk-padding-small">
