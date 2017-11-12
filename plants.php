@@ -68,8 +68,8 @@ ini_set('display_errors', 1);
     <?php include "includes/head.php"; ?>
   </head>
   <body>
-    <div id="sponsor" class="uk-cover-container" uk-height-viewport>
-        <img src="https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg" alt="" uk-cover>
+    <div id="sponsor" class="uk-background-cover uk-flex uk-flex-center uk-flex-middle" style="background-image: url(https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg);" uk-height-viewport>
+        <p>Hello</p>
     </div>
     <!-- Header -->
     <?php include "includes/logo.php"; ?>
