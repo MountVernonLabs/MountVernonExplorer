@@ -25,3 +25,5 @@ $( ".filter-checkbox" ).bind( "click", function() {
 $( ".clear-filter" ).bind( "click", function() {
   clearFilter();
 });
+
+$("#sponsor").delay(6400).fadeOut(800);

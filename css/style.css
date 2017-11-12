@@ -61,3 +61,7 @@ background: #002C3D;
   height: 100%;
   width: 100%;
 }
+
+#sponsor {
+  z-index: 9999;
+}
