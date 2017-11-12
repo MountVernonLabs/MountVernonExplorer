@@ -66,6 +66,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.40"></script>
+    <script src="./js/script.js?v2.42"></script>
   </body>
 </html>
