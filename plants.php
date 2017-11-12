@@ -122,8 +122,26 @@ ini_set('display_errors', 1);
           $plants_data = file_get_contents("http://www.mountvernon.org/site/api/plants");
           $plants = json_decode($plants_data, true);
 
-          foreach($plants as $plant){ ?>
-            <div>
+
+          foreach($plants as $plant){
+            $class_type = "";
+            $class_location = "";
+            $class_color = "";
+            $class_season = "";
+            foreach (bigtreeArray($plant["type"]) as $type) {
+              $class_type = $class_type."type-".$type." ";
+            }
+            foreach (bigtreeArray($plant["location"]) as $location) {
+              $class_location = $class_location."location-".$location." ";
+            }
+            foreach (bigtreeArray($plant["color"]) as $color) {
+              $class_color = $class_color."color-".$color." ";
+            }
+            foreach (bigtreeArray($plant["season"]) as $season) {
+              $class_season = $class_season."season-".$season." ";
+            }
+        ?>
+            <div class="plant-card <?=$class_type?> <?=$class_location?> <?=$class_color?> <?=$class_season?>">
                 <div class="uk-card uk-card-default uk-card-body uk-width-small mv-plant-image uk-text-small uk-padding-small">
                   <a href="#plant<?php echo $plant["id"]?>" uk-toggle><img src="<?php echo prefixURL($plant["main_photo"],'sml_')?>"></a>
                   <p class="uk-padding-remove"><?php echo $plant["comon_name"]?></p>
