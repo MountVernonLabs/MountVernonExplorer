@@ -6,8 +6,8 @@ ini_set('display_errors', 1);
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
-
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <meta name="HandheldFriendly" content="true" />
     <title>Explorer - Mount Vernon Explorer</title>
     <?php include "includes/head.php"; ?>
   </head>
@@ -22,7 +22,7 @@ ini_set('display_errors', 1);
           <span class="uk-margin-right">Nearby Items</span>
           <select id="explore-filter">
             <option value="" selected>Show All</option>
-            <option value="stucture">Building</option>
+            <option value="structure">Building</option>
             <option value="restroom">Restrooms</option>
             <option value="retail">Food & Retail</option>
             <option value="transportation">Transportation</option>
@@ -66,6 +66,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.38"></script>
+    <script src="./js/script.js?v2.40"></script>
   </body>
 </html>

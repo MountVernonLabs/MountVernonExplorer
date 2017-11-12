@@ -1,3 +1,18 @@
+// functions
+function filterExplorer(){
+  if ($("#explore-filter").val() != ""){
+    $(".type-all").hide();
+    $(".type-"+$("#explore-filter").val()).show();
+  } else {
+    $(".type-all").show();
+  }
+}
+
+
+$("#explore-filter").on('change',function(){
+   filterExplorer();
+});
+
 // Setup the Open Street Map Viz
 var projection = ol.proj.get('EPSG:3857');
 var view = new ol.View({
@@ -110,15 +125,18 @@ var view = new ol.View({
       $("#locations-list").html("");
       $.each(mvloc, function(i, field){
           // Populate the list
-          $("#locations-list").append("<tr class=\"uk-padding-remove\">");
-          $("#locations-list").append("<td class=\"uk-padding-small uk-padding-remove-right mv-list-image\"><a href=\"#location"+field.id+"\" uk-toggle><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></a></td>");
-          $("#locations-list").append("<td class=\"uk-text-bold uk-padding-small\">"+field.title+"</td>");
+          var thisitem = "<tr class=\"uk-padding-remove type-all type-"+field.type+"\">";
+          thisitem = thisitem+"<td class=\"uk-padding-small uk-padding-remove-right mv-list-image\"><a href=\"#location"+field.id+"\" uk-toggle><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></a></td>";
+          thisitem = thisitem+"<td class=\"uk-text-bold uk-padding-small\">"+field.title+"</td>";
           if (field.distance > 1){
-            $("#locations-list").append("<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance * 10) / 10+"</span><br>miles</td>");
+            thisitem = thisitem+"<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance * 10) / 10+"</span><br>miles</td>";
           } else {
-            $("#locations-list").append("<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance*5280)+"</span><br>feet</td>");
+            thisitem = thisitem+"<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance*5280)+"</span><br>feet</td>";
           }
-          $("#locations-list").append("</tr>");
+          thisitem = thisitem+"</tr>";
+          $("#locations-list").append(thisitem);
       });
+      filterExplorer();
+
 
     });
