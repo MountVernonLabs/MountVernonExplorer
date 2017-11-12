@@ -4,10 +4,10 @@ ini_set('display_errors', 1);
 ?>
 
 <?php
-  $json = file_get_contents('http://www.mountvernon.org/site/api/locations');
+  $json = file_get_contents('http://www.mountvernon.org/site/api/plants/locations');
   $locations = json_decode($json, true);
   foreach ($locations as $location){
-    $venue[$location["id"]] = $location["title"];
+    $venue[$location["id"]] = $location["name"];
   }
 
   $json = file_get_contents('http://www.mountvernon.org/site/api/plants/colors');
@@ -52,6 +52,11 @@ ini_set('display_errors', 1);
     $p_uses[$plant_use["id"]] = $plant_use["name"];
   }
 
+  $json = file_get_contents('http://www.mountvernon.org/site/api/plants/seasons');
+  $plant_seasons = json_decode($json, true);
+  foreach ($plant_seasons as $plant_season){
+    $p_season[$plant_season["id"]] = $plant_season["name"];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -68,13 +73,47 @@ ini_set('display_errors', 1);
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
     </div>
-    <div class="uk-container uk-padding-medium">
-        <ul class="uk-iconnav">
-            <span class="uk-text-small uk-text-bold uk-text-uppercase">Filter By:</span>
-            <li><a href="#" uk-icon="icon: location"></a></li>
-            <li><a href="#" uk-icon="icon: paint-bucket"></a></li>
-            <li><a href="#" uk-icon="icon: calendar"></a></li>
-        </ul>
+    <div class="uk-offcanvas-content">
+      <div class="uk-container uk-padding-medium">
+          <ul class="uk-iconnav">
+              <span class="uk-text-small uk-text-bold uk-text-uppercase">Filter By:</span>
+              <li><a uk-icon="icon: location" uk-toggle="target: #plantfinder-filter"></a></li>
+              <li><a uk-icon="icon: paint-bucket" uk-toggle="target: #plantfinder-filter"></a></li>
+              <li><a uk-icon="icon: calendar" uk-toggle="target: #plantfinder-filter"></a></li>
+          </ul>
+          <div id="plantfinder-filter" uk-offcanvas="flip: true; overlay: true; mode: push">
+              <div class="uk-offcanvas-bar uk-padding-small">
+                  <button class="uk-offcanvas-close" type="button" uk-close></button>
+                  <p class="uk-padding-remove-top uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Type of Plant</p>
+                  <?php foreach ($plant_types as $type){ ?>
+                    <div class="uk-width-small uk-float-left">
+                      <input type="checkbox" id="type-<?=$type["id"]?>" class="filter-checkbox"><label><?=$type["name"]?></label>
+                    </div>
+                  <?php } ?>
+                  <div class="uk-clearfix"></div>
+                  <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Primary Color</p>
+                  <?php foreach ($plant_colors as $color){ ?>
+                    <div class="uk-width-small uk-float-left">
+                      <input type="checkbox" id="color-<?=$color["id"]?>" class="filter-checkbox"><label><?=$color["name"]?></label>
+                    </div>
+                  <?php } ?>
+                  <div class="uk-clearfix"></div>
+                  <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Location</p>
+                  <?php foreach ($locations as $location){ ?>
+                    <div class="uk-width-medium uk-float-left">
+                      <input type="checkbox" id="location-<?=$location["id"]?>" class="filter-checkbox"><label><?=$location["name"]?></label>
+                    </div>
+                  <?php } ?>
+                  <div class="uk-clearfix"></div>
+                  <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Season</p>
+                  <?php foreach ($plant_seasons as $season){ ?>
+                    <div class="uk-width-small uk-float-left">
+                      <input type="checkbox" id="season-<?=$season["id"]?>" class="filter-checkbox"><label><?=$season["name"]?></label>
+                    </div>
+                  <?php } ?>
+              </div>
+          </div>
+      </div>
     </div>
     <div class="uk-container uk-padding-small">
 
@@ -109,7 +148,7 @@ ini_set('display_errors', 1);
                                 <img src="<?php echo $plant["main_photo"]?>" alt="" uk-cover>
                               </div>
                             </li>
-                              <?php 
+                              <?php
                                 $gallery = json_decode($plant["gallery"], true);
                                 foreach ($gallery as $gimage){
                               ?>
@@ -268,7 +307,7 @@ ini_set('display_errors', 1);
                 <div class="layered_image">
                   <img class="base" src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/usmap-base.png">
 
-                  <?php 
+                  <?php
                     $min = preg_split('#(?<=\d)(?=[a-z])#i', ($plant["zone"]));
                     $max = preg_split('#(?<=\d)(?=[a-z])#i', ($plant["zone_max"]));
 
