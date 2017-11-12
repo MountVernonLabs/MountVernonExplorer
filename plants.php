@@ -80,6 +80,8 @@ ini_set('display_errors', 1);
               <li><a uk-icon="icon: location" uk-toggle="target: #plantfinder-filter"></a></li>
               <li><a uk-icon="icon: paint-bucket" uk-toggle="target: #plantfinder-filter"></a></li>
               <li><a uk-icon="icon: calendar" uk-toggle="target: #plantfinder-filter"></a></li>
+              <li><a uk-icon="icon: refresh" class="uk-margin-left clear-filter" style="display: none;"></a></li>
+              <span class="uk-text-small uk-text-uppercase clear-filter" style="display: none;">Show All</span>
           </ul>
           <div id="plantfinder-filter" uk-offcanvas="flip: true; overlay: true; mode: push">
               <div class="uk-offcanvas-bar uk-padding-small">
@@ -359,6 +361,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-
+    <script src="./js/script-plants.js?v1.0"></script>
   </body>
 </html>
