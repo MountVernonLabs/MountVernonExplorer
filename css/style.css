@@ -35,7 +35,10 @@
   max-width: 450px;
 }
 .mv-menu {
-background: #002C3D;
+  background: #002C3D;
+}
+.offcanvas-filter {
+  background-color: #36302A;
 }
 .uk-button-danger {
   background-color: #8D2838 !important;

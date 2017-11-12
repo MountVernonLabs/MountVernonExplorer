@@ -87,7 +87,7 @@ ini_set('display_errors', 1);
               <span class="uk-text-small uk-text-uppercase clear-filter" style="display: none;">Show All</span>
           </ul>
           <div id="plantfinder-filter" uk-offcanvas="flip: true; overlay: true; mode: push">
-              <div class="uk-offcanvas-bar uk-padding-small">
+              <div class="uk-offcanvas-bar uk-padding-small offcanvas-filter">
                   <button class="uk-offcanvas-close" type="button" uk-close></button>
                   <p class="uk-padding-remove-top uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Type of Plant</p>
                   <?php foreach ($plant_types as $type){ ?>
@@ -364,6 +364,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script-plants.js?v1.0"></script>
+    <script src="./js/script-plants.js?v1.1"></script>
   </body>
 </html>
