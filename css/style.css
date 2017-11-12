@@ -68,3 +68,7 @@
 #sponsor {
   z-index: 9999;
 }
+
+.uk-active a {
+  background: #006160 !important;
+}
