@@ -72,12 +72,11 @@ ini_set('display_errors', 1);
       usort($all, "cmp");
 
       ?>
-      <table class="uk-table uk-table-divider uk-table-small uk-text-small">
+      <table class="uk-table uk-table-striped uk-table-small uk-text-small">
         <thead>
             <tr>
                 <th>Time</th>
                 <th>Tour</th>
-                <th>Location</th>
                 <th></th>
             </tr>
         </thead>
@@ -90,7 +89,7 @@ ini_set('display_errors', 1);
             $interval = $future_date->diff($now);
 
           if ($event["ticket_link"] != ""){
-            $upcharge = "<span class=\"uk-label uk-label-warning\">$</span>";
+            $upcharge = " <span class=\"uk-label uk-label-warning\">$</span>";
           } else {
             $upcharge = " ";
           }
@@ -98,14 +97,15 @@ ini_set('display_errors', 1);
           if ($future_date >= $now){
               echo "<tr uk-toggle=\"target: #".$event["route"]."\">";
               echo "<td class=\"uk-text-nowrap\">".date('h:i a', strtotime($event["time"]))."</td>";
-              echo "<td><strong>".$event["title"]."</strong><span class=\"upcharge\">".$upcharge."</span></td>";
-              echo "<td>".$event["location"]."</td>";
+              echo "<td><span class=\"uk-text-bold\">".$event["title"]."</span><span class=\"upcharge\">".$upcharge."</span><br>".$event["description"]."</td>";
+              echo "<td><span uk-icon=\"icon: info\"></span></td>";
               echo "</tr>";
               echo "<div id=\"".$event["route"]."\" class=\"uk-modal-full\" uk-modal>";
               echo "<div class=\"uk-modal-dialog\" uk-height-viewport>";
               echo "<button class=\"uk-modal-close-full uk-close-large\" type=\"button\" uk-close></button>";
               echo "<div class=\"uk-padding-large\">";
               echo "<h3>".$event["title"]."</h3>";
+              echo "<p class=\"uk-text-uppercase\">Location: <strong>".$event["location"]."</strong></p>";
               echo "<p class=\"subtext\">".$event["description"]."</p>";
               echo "<p class=\"uk-text-meta\">Included with general admission, no ticket purchase is required.</p>";
               echo "</div></div></div>";
