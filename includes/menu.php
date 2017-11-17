@@ -6,19 +6,19 @@
 
             <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: world"></span>
-              <a href="<?=$base_url?>" class="uk-padding-remove-top">Explorer</a>
+              <a href="<?php echo $base_url?>" class="uk-padding-remove-top">Explorer</a>
             </li>
 
             <li class="uk-nav-divider"></li>
             <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: location"></span>
-              <a href="<?=$base_url?>/shuttles" class="uk-padding-remove-top">Shuttle Tracker</a>
+              <a href="<?php echo $base_url?>/shuttles" class="uk-padding-remove-top">Shuttle Tracker</a>
             </li>
 
             <li class="uk-nav-divider"></li>
             <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: bolt"></span>
-              <a href="<?=$base_url?>/plants" class="uk-padding-remove-top">Plant Finder</a>
+              <a href="<?php echo $base_url?>/plants" class="uk-padding-remove-top">Plant Finder</a>
             </li>
 
         </ul>
@@ -27,6 +27,9 @@
             <button class="uk-button uk-button-danger">Buy Tickets</button>
           </a>
         </p>
-
+        <p>
+          <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: phone"></span>
+          <a href="tel:17037802000" class="uk-padding-remove-top">Call Mount Vernon</a>
+        </p>
     </div>
 </div>

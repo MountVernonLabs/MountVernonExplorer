@@ -17,7 +17,7 @@ ini_set('display_errors', 1);
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
 
-      <ul class="uk-subnav uk-subnav-pill uk-margin-remove-top" uk-switcher>
+      <ul class="uk-subnav uk-subnav-pill uk-margin-auto" uk-switcher>
         <li><a href="#" onclick="document.getElementById('dg').src += ''">Distillery & Gristmill</a></li>
         <li><a href="#" onclick="document.getElementById('pfw').src += ''">Wharf</a></li>
       </ul>

@@ -4,10 +4,10 @@ ini_set('display_errors', 1);
 ?>
 
 <?php
-  $json = file_get_contents('http://www.mountvernon.org/site/api/locations');
+  $json = file_get_contents('http://www.mountvernon.org/site/api/plants/locations');
   $locations = json_decode($json, true);
   foreach ($locations as $location){
-    $venue[$location["id"]] = $location["title"];
+    $venue[$location["id"]] = $location["name"];
   }
 
   $json = file_get_contents('http://www.mountvernon.org/site/api/plants/colors');
@@ -52,6 +52,11 @@ ini_set('display_errors', 1);
     $p_uses[$plant_use["id"]] = $plant_use["name"];
   }
 
+  $json = file_get_contents('http://www.mountvernon.org/site/api/plants/seasons');
+  $plant_seasons = json_decode($json, true);
+  foreach ($plant_seasons as $plant_season){
+    $p_season[$plant_season["id"]] = $plant_season["name"];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -63,18 +68,57 @@ ini_set('display_errors', 1);
     <?php include "includes/head.php"; ?>
   </head>
   <body>
+    <div id="sponsor" class="uk-background-cover uk-flex uk-flex-center uk-flex-middle" style="background-image: url(https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg);" uk-height-viewport>
+        <p>Hello</p>
+    </div>
     <!-- Header -->
     <?php include "includes/logo.php"; ?>
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
     </div>
-    <div class="uk-container uk-padding-medium">
-        <ul class="uk-iconnav">
-            <span class="uk-text-small uk-text-bold uk-text-uppercase">Filter By:</span>
-            <li><a href="#" uk-icon="icon: location"></a></li>
-            <li><a href="#" uk-icon="icon: paint-bucket"></a></li>
-            <li><a href="#" uk-icon="icon: calendar"></a></li>
-        </ul>
+    <div class="uk-offcanvas-content">
+      <div class="uk-container uk-padding-medium">
+          <ul class="uk-iconnav">
+              <span class="uk-text-small uk-text-bold uk-text-uppercase">Filter By:</span>
+              <li><a uk-icon="icon: location" uk-toggle="target: #plantfinder-filter"></a></li>
+              <li><a uk-icon="icon: paint-bucket" uk-toggle="target: #plantfinder-filter"></a></li>
+              <li><a uk-icon="icon: calendar" uk-toggle="target: #plantfinder-filter"></a></li>
+              <li><a uk-icon="icon: refresh" class="uk-margin-left clear-filter" style="display: none;"></a></li>
+              <span class="uk-text-small uk-text-uppercase clear-filter" style="display: none;">Show All</span>
+          </ul>
+          <div id="plantfinder-filter" uk-offcanvas="flip: true; overlay: true; mode: push">
+              <div class="uk-offcanvas-bar uk-padding-small offcanvas-filter">
+                  <button class="uk-offcanvas-close" type="button" uk-close></button>
+                  <p class="uk-padding-remove-top uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Type of Plant</p>
+                  <?php foreach ($plant_types as $type){ ?>
+                    <div class="uk-width-small uk-float-left">
+                      <input type="checkbox" id="type-<?=$type["id"]?>" class="filter-checkbox"><label><?=$type["name"]?></label>
+                    </div>
+                  <?php } ?>
+                  <div class="uk-clearfix"></div>
+                  <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Primary Color</p>
+                  <?php foreach ($plant_colors as $color){ ?>
+                    <div class="uk-width-small uk-float-left">
+                      <input type="checkbox" id="color-<?=$color["id"]?>" class="filter-checkbox"><label><?=$color["name"]?></label>
+                    </div>
+                  <?php } ?>
+                  <div class="uk-clearfix"></div>
+                  <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Location</p>
+                  <?php foreach ($locations as $location){ ?>
+                    <div class="uk-width-medium uk-float-left">
+                      <input type="checkbox" id="location-<?=$location["id"]?>" class="filter-checkbox"><label><?=$location["name"]?></label>
+                    </div>
+                  <?php } ?>
+                  <div class="uk-clearfix"></div>
+                  <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Season</p>
+                  <?php foreach ($plant_seasons as $season){ ?>
+                    <div class="uk-width-small uk-float-left">
+                      <input type="checkbox" id="season-<?=$season["id"]?>" class="filter-checkbox"><label><?=$season["name"]?></label>
+                    </div>
+                  <?php } ?>
+              </div>
+          </div>
+      </div>
     </div>
     <div class="uk-container uk-padding-small">
 
@@ -83,42 +127,60 @@ ini_set('display_errors', 1);
           $plants_data = file_get_contents("http://www.mountvernon.org/site/api/plants");
           $plants = json_decode($plants_data, true);
 
-          foreach($plants as $plant){ ?>
-            <div>
+
+          foreach($plants as $plant){
+            $class_type = "";
+            $class_location = "";
+            $class_color = "";
+            $class_season = "";
+            foreach (bigtreeArray($plant["type"]) as $type) {
+              $class_type = $class_type."type-".$type." ";
+            }
+            foreach (bigtreeArray($plant["location"]) as $location) {
+              $class_location = $class_location."location-".$location." ";
+            }
+            foreach (bigtreeArray($plant["color"]) as $color) {
+              $class_color = $class_color."color-".$color." ";
+            }
+            foreach (bigtreeArray($plant["season"]) as $season) {
+              $class_season = $class_season."season-".$season." ";
+            }
+        ?>
+            <div class="plant-card <?=$class_type?> <?=$class_location?> <?=$class_color?> <?=$class_season?>">
                 <div class="uk-card uk-card-default uk-card-body uk-width-small mv-plant-image uk-text-small uk-padding-small">
-                  <a href="#plant<?=$plant["id"]?>" uk-toggle><img src="<?=prefixURL($plant["main_photo"],'sml_')?>"></a>
-                  <p class="uk-padding-remove"><?=$plant["comon_name"]?></p>
+                  <a href="#plant<?php echo $plant["id"]?>" uk-toggle><img src="<?php echo prefixURL($plant["main_photo"],'sml_')?>"></a>
+                  <p class="uk-padding-remove"><?php echo $plant["comon_name"]?></p>
                 </div>
             </div>
-        <? } ?>
+        <?php  } ?>
       </div>
     </div>
     <!-- This is the modal -->
     <div id="mv-plants-more">
       <?php  foreach($plants as $plant){ ?>
-      <div id="plant<?=$plant["id"]?>" class="uk-modal-full" uk-modal>
+      <div id="plant<?php echo $plant["id"]?>" class="uk-modal-full" uk-modal>
           <div class="uk-modal-dialog" uk-height-viewport>
               <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
               <div class="uk-padding-large">
-                  <h3><?=$plant["comon_name"]?></h3>
+                  <h3><?php echo $plant["comon_name"]?></h3>
                   <div class="uk-height-max-medium" style="height: 400px;">
                     <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 400px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
                         <ul class="uk-slideshow-items">
                             <li>
                               <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                <img src="<?=$plant["main_photo"]?>" alt="" uk-cover>
+                                <img src="<?php echo prefixURL($plant["main_photo"], "sml_")?>" alt="" uk-cover>
                               </div>
                             </li>
-                              <?
+                              <?php
                                 $gallery = json_decode($plant["gallery"], true);
                                 foreach ($gallery as $gimage){
                               ?>
                                 <li>
                                   <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                    <img src="<?=$gimage["image"]?>" alt="" uk-cover>
+                                    <img src="<?php echo prefixURL($gimage["image"], "sml_")?>" alt="" uk-cover>
                                   </div>
                                 </li>
-                              <? } ?>
+                              <?php  } ?>
 
                         </ul>
                         <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
@@ -127,148 +189,148 @@ ini_set('display_errors', 1);
                   </div>
 
 
-                  <? if ($plant["history"]) { ?>
+                  <?php  if ($plant["history"]) { ?>
                     <h4 class="uk-text-uppercase">History</h4>
-                    <p><?=$plant["history"]?></p>
-                  <? } ?>
+                    <p><?php echo $plant["history"]?></p>
+                  <?php  } ?>
                   <h4 class="uk-text-uppercase">Details</h4>
-                  <? if ($plant["details"]) { ?>
-                    <p><?=$plant["details"]?></p>
-                  <? } ?>
+                  <?php  if ($plant["details"]) { ?>
+                    <p><?php echo $plant["details"]?></p>
+                  <?php  } ?>
                   <table class="uk-table uk-table-divider uk-padding-small">
                     <tbody>
-                      <? if ($plant["latin_name"]) { ?>
+                      <?php  if ($plant["latin_name"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Latin Name</td>
-                                 <td><?=$plant["latin_name"]?></td>
+                                 <td><?php echo $plant["latin_name"]?></td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["family"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["family"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Family</td>
-                                 <td><?=$plant["family"]?></td>
+                                 <td><?php echo $plant["family"]?></td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["also_known_as"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["also_known_as"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Also Known As</td>
-                                 <td><?=str_replace("\r\n","<br>",$plant["also_known_as"])?></td>
+                                 <td><?php echo str_replace("\r\n","<br>",$plant["also_known_as"])?></td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["bloom_start_time"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["bloom_start_time"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Bloom Season</td>
-                                 <td><?=date('F',strtotime($plant["bloom_start_time"]));?> - <?=date('F',strtotime($plant["bloom_end_time"]));?></td>
+                                 <td><?php echo date('F',strtotime($plant["bloom_start_time"]));?> - <?php echo date('F',strtotime($plant["bloom_end_time"]));?></td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["native_range"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["native_range"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Native Range</td>
-                                 <td><?=$plant["native_range"]?></td>
+                                 <td><?php echo $plant["native_range"]?></td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["max_height"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["max_height"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Max Height</td>
-                                 <td><?=$plant["max_height"]?>'</td>
+                                 <td><?php echo $plant["max_height"]?>'</td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["max_spread"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["max_spread"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Max Spread</td>
-                                 <td><?=$plant["max_spread"]?>'</td>
+                                 <td><?php echo $plant["max_spread"]?>'</td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["tollerances"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["tollerances"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Tollerances</td>
                                  <td>
-                                   <? foreach (bigtreeArray($plant["tollerances"]) as $tollerance){
+                                   <?php  foreach (bigtreeArray($plant["tollerances"]) as $tollerance){
                                         echo $p_tollerance[$tollerance]."<br>";
                                       }
                                    ?>
                                  </td>
                              </tr>
-                      <? } ?>
-                      <? if ($plant["uses"]) { ?>
+                      <?php  } ?>
+                      <?php  if ($plant["uses"]) { ?>
                              <tr class="uk-padding-remove">
                                  <td class="uk-text-bold">Uses</td>
                                  <td>
-                                   <? foreach (bigtreeArray($plant["uses"]) as $use){
+                                   <?php  foreach (bigtreeArray($plant["uses"]) as $use){
                                         echo $p_uses[$use]."<br>";
                                       }
                                    ?>
                                  </td>
                              </tr>
-                      <? } ?>
+                      <?php  } ?>
                     </tbody>
 
                   </table>
 
-                  <? if ($plant["type"]){
+                  <?php  if ($plant["type"]){
                     foreach (bigtreeArray($plant["type"]) as $type){ ?>
           					<div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
-          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-type-C/<?=$type?>.svg">
-                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Type: </span><br><?=$p_type[$type]?></div>
+          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-type-C/<?php echo $type?>.svg">
+                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Type: </span><br><?php echo $p_type[$type]?></div>
                     </div>
-          				<? }} ?>
-                  <? if ($plant["sun"]){
+          				<?php  }} ?>
+                  <?php  if ($plant["sun"]){
                     foreach (bigtreeArray($plant["sun"]) as $sun){ ?>
           					<div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
-          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-sun-C/<?=$sun?>.svg">
-                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Sunlight: </span><br><?=$p_sun[$sun]?></div>
+          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-sun-C/<?php echo $sun?>.svg">
+                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Sunlight: </span><br><?php echo $p_sun[$sun]?></div>
                     </div>
-          				<? }} ?>
-                  <? if ($plant["wildlife"]){
+          				<?php  }} ?>
+                  <?php  if ($plant["wildlife"]){
                     foreach (bigtreeArray($plant["wildlife"]) as $wildlife){ ?>
           					<div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
-          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-wildlife-C/<?=$wildlife?>.svg">
-                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Wildlife: </span><br><?=$p_wildlife[$wildlife]?></div>
+          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-wildlife-C/<?php echo $wildlife?>.svg">
+                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Wildlife: </span><br><?php echo $p_wildlife[$wildlife]?></div>
                     </div>
-          				<? }} ?>
-                  <? if ($plant["toxicity"]){
+          				<?php  }} ?>
+                  <?php  if ($plant["toxicity"]){
                     foreach (bigtreeArray($plant["toxicity"]) as $toxic){ ?>
           					<div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
-          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-toxicity-C/<?=$toxic?>.svg">
-                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Toxicity: </span><br><?=$p_toxic[$toxic]?></div>
+          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-icons-toxicity-C/<?php echo $toxic?>.svg">
+                      <div class="uk-padding-remove uk-card-footer"><span class="uk-text-bold">Toxicity: </span><br><?php echo $p_toxic[$toxic]?></div>
                     </div>
-          				<? }} ?>
-                  <? if ($plant["polinator"] == "on") { ?>
+          				<?php  }} ?>
+                  <?php  if ($plant["polinator"] == "on") { ?>
                     <div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
           						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-2-icons-pollinator-C.svg">
                       <div class="uk-padding-remove uk-card-footer">Polinator<br>&nbsp;</div>
                     </div>
-                  <? } ?>
-                  <? if ($plant["grown_by_washington"] == "on") { ?>
+                  <?php  } ?>
+                  <?php  if ($plant["grown_by_washington"] == "on") { ?>
                     <div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
           						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-2-icons-GrownBy-C.svg">
                       <div class="uk-padding-remove uk-card-footer">Grown by Washington</div>
                     </div>
-                  <? } ?>
-                  <? if ($plant["sold_at_mv"] == "on") { ?>
+                  <?php  } ?>
+                  <?php  if ($plant["sold_at_mv"] == "on") { ?>
                     <div class="uk-card uk-card-default uk-card-body uk-width-small uk-padding-small uk-float-left">
           						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/icons/color/PF-2-icons-GrownBy-C.svg">
                       <div class="uk-padding-remove uk-card-footer">Sold at Mount Vernon</div>
                     </div>
-                  <? } ?>
+                  <?php  } ?>
                   <div class="uk-clearfix"></div>
                   <h4 class="uk-text">Colors</h4>
-                  <? foreach (bigtreeArray($plant["color"]) as $color){ ?>
-                    <div style="width: 30px;height:30px;margin-right: 5px; margin-bottom: 5px; float: left; background: #<?=$colors[$color]?>"></div>
-                  <? } ?>
+                  <?php  foreach (bigtreeArray($plant["color"]) as $color){ ?>
+                    <div style="width: 30px;height:30px;margin-right: 5px; margin-bottom: 5px; float: left; background: #<?php echo $colors[$color]?>"></div>
+                  <?php  } ?>
                   <div style="clear:both"></div>
                   <h4 class="uk-text-uppercase">Planted at Mount Vernon</h4>
                   <div class="layered_image">
                     <img class="base" src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/map/PF_map_BG-desat.jpg">
-          					<? foreach (bigtreeArray($plant["location"]) as $location){ ?>
-          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/map/<?=$location?>.png">
-          					<? } ?>
+          					<?php  foreach (bigtreeArray($plant["location"]) as $location){ ?>
+          						<img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/map/<?php echo $location?>.png">
+          					<?php  } ?>
                 </div>
                 <h4 class="uk-text-uppercase">Hardiness Zones</h4>
                 <div class="layered_image">
                   <img class="base" src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/usmap-base.png">
 
-                  <?
+                  <?php
                     $min = preg_split('#(?<=\d)(?=[a-z])#i', ($plant["zone"]));
                     $max = preg_split('#(?<=\d)(?=[a-z])#i', ($plant["zone_max"]));
 
@@ -276,19 +338,19 @@ ini_set('display_errors', 1);
                         if ($min[0] <= $i && $max[0] >= $i) {
                           if ($min[0] == $i && $min[1] == "a") {
                     ?>
-                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>a.png">
-                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>b.png">
-                    <?	} elseif ($min[0] == $i && $min[1] == "b") { ?>
-                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>b.png">
-                    <?	} elseif ($max[0] == $i && $max[1] == "a") { ?>
-                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>a.png">
-                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>b.png">
-                    <?	} elseif ($max[0] == $i && $max[1] == "a") { ?>
-                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>b.png">
-                    <?	} else { ?>
-                      <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>a.png">
-                      <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?=$i?>b.png">
-                    <?			}
+                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>a.png">
+                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>b.png">
+                    <?php 	} elseif ($min[0] == $i && $min[1] == "b") { ?>
+                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>b.png">
+                    <?php 	} elseif ($max[0] == $i && $max[1] == "a") { ?>
+                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>a.png">
+                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>b.png">
+                    <?php 	} elseif ($max[0] == $i && $max[1] == "a") { ?>
+                            <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>b.png">
+                    <?php 	} else { ?>
+                      <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>a.png">
+                      <img src="//mtv-main-assets.s3.amazonaws.com/files/plant-finder/zones/USDA-hardiness-zones-overlays/<?php echo $i?>b.png">
+                    <?php 			}
                         }
                     }
                   ?>
@@ -297,11 +359,11 @@ ini_set('display_errors', 1);
               </div>
           </div>
       </div>
-      <? } ?>
+      <?php  } ?>
     </div>
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-
+    <script src="./js/script-plants.js?v1.1"></script>
   </body>
 </html>
