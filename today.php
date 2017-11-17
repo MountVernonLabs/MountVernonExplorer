@@ -114,6 +114,8 @@
       </table>
     </div>
 
+    <a href="http://www.mountvernon.org/calendar" target="_blank"><button class="uk-button uk-margin-top uk-margin-small-left uk-button-primary">VIEW FULL CALENDAR</button></a>
+
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
   </body>
