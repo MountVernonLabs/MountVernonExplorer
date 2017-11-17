@@ -44,7 +44,8 @@ ini_set('display_errors', 1);
                   "ticket_link" => $event["ticket_link"],
                   "description" => strip_tags($event["description"]),
                   "location" => $venue[$event["location"]],
-                  "time" => $event["start_time"]
+                  "time" => $event["start_time"],
+                  "route" => $event["route"]
                 );
         array_push($all, $item);
 
@@ -55,7 +56,8 @@ ini_set('display_errors', 1);
                     "ticket_link" => $event["ticket_link"],
                     "description" => strip_tags($event["description"]),
                     "location" => $venue[$event["location"]],
-                    "time" => $times["start_time"]
+                    "time" => $times["start_time"],
+                    "route" => $event["route"]
                   );
           array_push($all, $item);
         }
@@ -94,17 +96,17 @@ ini_set('display_errors', 1);
           }
 
           if ($future_date >= $now){
-              echo "<tr uk-toggle=\"target: #locationid\">";
+              echo "<tr uk-toggle=\"target: #".$event["route"]."\">";
               echo "<td class=\"uk-text-nowrap\">".date('h:i a', strtotime($event["time"]))."</td>";
               echo "<td><strong>".$event["title"]."</strong><span class=\"upcharge\">".$upcharge."</span></td>";
               echo "<td>".$event["location"]."</td>";
               echo "</tr>";
-              echo "<div id=\"locationid\" class=\"uk-modal-full\" uk-modal>";
+              echo "<div id=\"".$event["route"]."\" class=\"uk-modal-full\" uk-modal>";
               echo "<div class=\"uk-modal-dialog\" uk-height-viewport>";
               echo "<button class=\"uk-modal-close-full uk-close-large\" type=\"button\" uk-close></button>";
               echo "<div class=\"uk-padding-large\">";
-              echo "<h3>Tribute at the Tomb</h3>";
-              echo "<p>Pay your respect to George Washington by participating in a brief wreath-laying ceremony at the Washingtons' Tomb.</p>";
+              echo "<h3>".$event["title"]."</h3>";
+              echo "<p class=\"subtext\">".$event["description"]."</p>";
               echo "<p class=\"uk-text-meta\">Included with general admission, no ticket purchase is required.</p>";
               echo "</div></div></div>";
             }
