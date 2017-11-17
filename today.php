@@ -1,8 +1,3 @@
-<?php
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-?>
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -45,7 +40,7 @@ ini_set('display_errors', 1);
                   "description" => strip_tags($event["description"]),
                   "location" => $venue[$event["location"]],
                   "time" => $event["start_time"],
-                  "route" => $event["route"]
+                  "route" => $event["route"],
                 );
         array_push($all, $item);
 
@@ -57,7 +52,7 @@ ini_set('display_errors', 1);
                     "description" => strip_tags($event["description"]),
                     "location" => $venue[$event["location"]],
                     "time" => $times["start_time"],
-                    "route" => $event["route"]
+                    "route" => $event["route"],
                   );
           array_push($all, $item);
         }
@@ -89,9 +84,11 @@ ini_set('display_errors', 1);
             $interval = $future_date->diff($now);
 
           if ($event["ticket_link"] != ""){
-            $upcharge = " <span class=\"uk-label uk-label-warning\">$</span>";
+            $upcharge = " <span class=\"uk-label uk-label-primary\">$</span>";
+            $ticketinfo = "<p class=\"uk-text-meta\">This tour requires a ticket in addition to general admission. <a href=\"http://www.mountvernon.org/plan-your-visit/tours-activities/".$event["route"]."\"></p><button class=\"uk-button uk-button-primary\">BUY TICKETS</button></a>";
           } else {
             $upcharge = " ";
+            $ticketinfo = "<p class=\"uk-text-meta\">Included with general admission, no ticket purchase is required.</p>";
           }
 
           if ($future_date >= $now){
@@ -107,7 +104,7 @@ ini_set('display_errors', 1);
               echo "<h3>".$event["title"]."</h3>";
               echo "<p class=\"uk-text-uppercase\">Location: <strong>".$event["location"]."</strong></p>";
               echo "<p class=\"subtext\">".$event["description"]."</p>";
-              echo "<p class=\"uk-text-meta\">Included with general admission, no ticket purchase is required.</p>";
+              echo "$ticketinfo";
               echo "</div></div></div>";
             }
 
