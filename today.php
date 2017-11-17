@@ -19,53 +19,100 @@ ini_set('display_errors', 1);
 
       <h4 class="uk-text-uppercase uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove">Today's Events</h4>
 
-    <table class="uk-table uk-table-divider uk-table-small uk-text-small">
-      <thead>
-          <tr>
-              <th>Time</th>
-              <th>Tour</th>
-              <th>Location</th>
-              <th></th>
-          </tr>
-      </thead>
-    <tbody>
-        <tr>
-            <td>03:45PM</td>
-            <td><strong>Premium Mansion Tour</strong>
-            <span class="uk-label uk-label-warning">$</span></td>
-            <td>Mansion Circle</td>
-        </tr>
-        <tr uk-toggle="target: #locationid">
-            <td>04:00PM</td>
-            <td><strong>Tribute at the Tombs</strong></td>
-            <td>Tombs</td>
-        </tr>
+      <?php
+      $all = array();
+      $now = new DateTime();
+      date_default_timezone_set('America/New_York');
+      // Use the line below to test other times
+      //$now = new DateTime('2017-08-14 10:00:00');
 
-        <div id="locationid" class="uk-modal-full" uk-modal>
-            <div class="uk-modal-dialog" uk-height-viewport>
-                <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
-                <div class="uk-padding-large">
-                    <h3>Tribute at the Tomb</h3>
-                    <p>Pay your respect to George Washington by participating in a brief wreath-laying ceremony at the Washingtons' Tomb.</p>
-                    <p class="uk-text-meta">Included with general admission, no ticket purchase is required.</p>
-                </div>
-            </div>
-        </div>
+      // Read today's events from the API
+      $json = file_get_contents('http://www.mountvernon.org/site/api/events-today');
+      $data = json_decode($json, true);
 
-        <tr>
-            <td>04:30PM</td>
-            <td><strong>Lives Bound Together</strong></td>
-            <td>Museum</td>
-        </tr>
-        <tr>
-            <td>05:00PM</td>
-            <td><strong>Miller Time</strong></td>
-            <td>Bar</td>
-        </tr>
-    </tbody>
-</table>
+      // Store a list of locations
+      $json = file_get_contents('http://www.mountvernon.org/site/api/locations');
+      $locations = json_decode($json, true);
+      foreach ($locations as $location){
+        $venue[$location["id"]] = $location["title"];
+      }
 
+      // Compile an array of all of the times of the day
+      foreach ($data as $event){
+        $item = array(
+                  "title" => $event["title"],
+                  "ticket_link" => $event["ticket_link"],
+                  "description" => strip_tags($event["description"]),
+                  "location" => $venue[$event["location"]],
+                  "time" => $event["start_time"]
+                );
+        array_push($all, $item);
 
+        $extra_times = json_decode($event["extra_times"], true);
+        foreach ($extra_times as $times){
+          $item = array(
+                    "title" => $event["title"],
+                    "ticket_link" => $event["ticket_link"],
+                    "description" => strip_tags($event["description"]),
+                    "location" => $venue[$event["location"]],
+                    "time" => $times["start_time"]
+                  );
+          array_push($all, $item);
+        }
+
+      }
+
+      // Sort the array by time of day
+      function cmp($a, $b)
+      {
+          return strcmp($a["time"], $b["time"]);
+      }
+      usort($all, "cmp");
+
+      ?>
+      <table class="uk-table uk-table-divider uk-table-small uk-text-small">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Tour</th>
+                <th>Location</th>
+                <th></th>
+            </tr>
+        </thead>
+      <tbody>
+
+        <?
+        // Print out newly sorted array
+        while (list($key, $event) = each($all)) {
+            $future_date = new DateTime(date('Y-m-d h:i a', strtotime(date('Y-m-d')." ".$event["time"])));
+            $interval = $future_date->diff($now);
+
+          if ($event["ticket_link"] != ""){
+            $upcharge = "<span class=\"uk-label uk-label-warning\">$</span>";
+          } else {
+            $upcharge = " ";
+          }
+
+          if ($future_date >= $now){
+              echo "<tr uk-toggle=\"target: #locationid\">";
+              echo "<td class=\"uk-text-nowrap\">".date('h:i a', strtotime($event["time"]))."</td>";
+              echo "<td><strong>".$event["title"]."</strong><span class=\"upcharge\">".$upcharge."</span></td>";
+              echo "<td>".$event["location"]."</td>";
+              echo "</tr>";
+              echo "<div id=\"locationid\" class=\"uk-modal-full\" uk-modal>";
+              echo "<div class=\"uk-modal-dialog\" uk-height-viewport>";
+              echo "<button class=\"uk-modal-close-full uk-close-large\" type=\"button\" uk-close></button>";
+              echo "<div class=\"uk-padding-large\">";
+              echo "<h3>Tribute at the Tomb</h3>";
+              echo "<p>Pay your respect to George Washington by participating in a brief wreath-laying ceremony at the Washingtons' Tomb.</p>";
+              echo "<p class=\"uk-text-meta\">Included with general admission, no ticket purchase is required.</p>";
+              echo "</div></div></div>";
+            }
+
+        }
+        ?>
+      </tbody>
+      </table>
     </div>
 
     <!-- Menu -->
