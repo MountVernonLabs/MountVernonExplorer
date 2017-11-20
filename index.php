@@ -94,7 +94,7 @@ ini_set('display_errors', 1);
 
                     if (!empty($rooms)) {
                   ?>
-                  <h4 class="uk-text-uppercase">Rooms</h4>
+                  <p class="uk-text-uppercase uk-text-bold">Rooms</p>
                   <ul uk-accordion>
                       <li>
                           <h3 class="uk-accordion-title">First Floor</h3>

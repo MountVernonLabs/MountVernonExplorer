@@ -12,7 +12,7 @@
             <li class="uk-nav-divider"></li>
             <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: location"></span>
-              <a href="<?php echo $base_url?>/shuttles" class="uk-padding-remove-top">Shuttle Tracker</a>
+              <a href="<?php echo $base_url?>/shuttles" class="uk-padding-remove-top">Shuttle Buses</a>
             </li>
 
             <li class="uk-nav-divider"></li>
