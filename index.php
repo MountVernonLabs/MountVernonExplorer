@@ -55,9 +55,112 @@ ini_set('display_errors', 1);
               <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
               <div class="uk-padding-large">
                   <h3><?php echo $location["title"]?></h3>
-                  <img src="<?php echo $location["image"]?>">
-                  <p><?php echo $location["content"]?></p>
-                  <a href="">Learn More</a>
+
+                  <div class="uk-height-max-medium" style="height: 400px;">
+                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 400px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
+                        <ul class="uk-slideshow-items">
+                            <li>
+                              <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                                <img src="<?php echo $location["image"] ?>" alt="" uk-cover>
+                              </div>
+                            </li>
+                              <?php
+                                $gallery = json_decode($location["media"], true);
+                                foreach ($gallery as $gimage){
+                              ?>
+                                <li>
+                                  <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                                    <img src="<?php echo prefixURL($gimage["image"], "sml_")?>" alt="" uk-cover>
+                                  </div>
+                                </li>
+                              <?php  } ?>
+
+                        </ul>
+                        <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+                        <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+                    </div>
+                  </div>
+                  <p><?php echo $location["description"]?></p>
+                  <?php
+                    unset($rooms);
+                    $rooms = array();
+
+                    foreach ($locations as $subloc){
+                      if ($subloc["parent"] == $location["id"] && $subloc["type"] == "room"){
+                        array_push($rooms, $subloc);
+                      }
+                    }
+                    aasort($rooms,"floor");
+
+                    if (!empty($rooms)) {
+                  ?>
+                  <h4 class="uk-text-uppercase">Rooms</h4>
+                  <ul uk-accordion>
+                      <li>
+                          <h3 class="uk-accordion-title">First Floor</h3>
+                          <div class="uk-accordion-content uk-padding-remove">
+                            <table class="uk-table uk-table-small uk-padding-remove">
+                                <tbody class="uk-padding-small">
+                                  <?php foreach ($rooms as $subloc){
+                                        if ($subloc["floor"] == "First"){
+                                  ?>
+                                    <tr class="uk-padding-remove">
+                                        <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
+                                          <a href="#location<?=$subloc["id"]?>" uk-toggle><img src="<?=$subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                        </td>
+                                        <td class="uk-padding-small">
+                                          <?=$subloc["title"]?>
+                                        </td>
+                                    </tr>
+                                  <?php }} ?>
+                                </tbody>
+                            </table>
+                          </div>
+                      </li>
+                      <li>
+                          <h3 class="uk-accordion-title">Second Floor</h3>
+                          <div class="uk-accordion-content uk-padding-remove">
+                            <table class="uk-table uk-table-small uk-padding-remove">
+                                <tbody class="uk-padding-small">
+                                  <?php foreach ($rooms as $subloc){
+                                        if ($subloc["floor"] == "Second"){
+                                  ?>
+                                    <tr class="uk-padding-remove">
+                                        <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
+                                          <a href="#location<?=$subloc["id"]?>" uk-toggle><img src="<?=$subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                        </td>
+                                        <td class="uk-padding-small">
+                                          <?=$subloc["title"]?>
+                                        </td>
+                                    </tr>
+                                  <?php }} ?>
+                                </tbody>
+                            </table>
+                          </div>
+                      </li>
+                      <li>
+                          <h3 class="uk-accordion-title">Third Floor</h3>
+                          <div class="uk-accordion-content uk-padding-remove">
+                            <table class="uk-table uk-table-small uk-padding-remove">
+                                <tbody class="uk-padding-small">
+                                  <?php foreach ($rooms as $subloc){
+                                        if ($subloc["floor"] == "Third"){
+                                  ?>
+                                    <tr class="uk-padding-remove">
+                                        <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
+                                          <a href="#location<?=$subloc["id"]?>" uk-toggle><img src="<?=$subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                        </td>
+                                        <td class="uk-padding-small">
+                                          <?=$subloc["title"]?>
+                                        </td>
+                                    </tr>
+                                  <?php }} ?>
+                                </tbody>
+                            </table>
+                          </div>
+                      </li>
+                  </ul>
+                <?php } ?>
               </div>
           </div>
       </div>
