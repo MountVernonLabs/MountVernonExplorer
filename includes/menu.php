@@ -11,6 +11,12 @@
 
             <li class="uk-nav-divider"></li>
             <li class="uk-margin-small-top">
+              <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: calendar"></span>
+              <a href="<?php echo $base_url?>/today" class="uk-padding-remove-top">Today's Events</a>
+            </li>
+
+            <li class="uk-nav-divider"></li>
+            <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: location"></span>
               <a href="<?php echo $base_url?>/shuttles" class="uk-padding-remove-top">Shuttle Buses</a>
             </li>
