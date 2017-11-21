@@ -23,6 +23,12 @@
 
             <li class="uk-nav-divider"></li>
             <li class="uk-margin-small-top">
+              <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: play-circle"></span>
+              <a href="<?php echo $base_url?>/audio" class="uk-padding-remove-top">Audio Tours</a>
+            </li>
+
+            <li class="uk-nav-divider"></li>
+            <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: bolt"></span>
               <a href="<?php echo $base_url?>/plants" class="uk-padding-remove-top">Plant Finder</a>
             </li>
