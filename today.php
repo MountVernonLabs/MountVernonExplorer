@@ -77,7 +77,7 @@
         </thead>
       <tbody>
 
-        <?
+        <?php 
         // Print out newly sorted array
         while (list($key, $event) = each($all)) {
             $future_date = new DateTime(date('Y-m-d h:i a', strtotime(date('Y-m-d')." ".$event["time"])));

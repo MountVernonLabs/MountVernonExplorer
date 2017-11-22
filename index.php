@@ -48,6 +48,10 @@ ini_set('display_errors', 1);
       <?php
         $locations_data = file_get_contents("http://www.mountvernon.org/site/api/locations");
         $locations = json_decode($locations_data, true);
+
+        $objects_data = file_get_contents("http://www.mountvernon.org/site/api/collections/withlocations");
+        $objects = json_decode($objects_data, true);
+
         foreach($locations as $location){
       ?>
       <div id="location<?php echo $location["id"]?>" class="uk-modal-full" uk-modal>
@@ -106,10 +110,10 @@ ini_set('display_errors', 1);
                                   ?>
                                     <tr class="uk-padding-remove">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
-                                          <a href="#location<?=$subloc["id"]?>" uk-toggle><img src="<?=$subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
                                         </td>
                                         <td class="uk-padding-small">
-                                          <?=$subloc["title"]?>
+                                          <?php echo $subloc["title"]?>
                                         </td>
                                     </tr>
                                   <?php }} ?>
@@ -127,10 +131,10 @@ ini_set('display_errors', 1);
                                   ?>
                                     <tr class="uk-padding-remove">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
-                                          <a href="#location<?=$subloc["id"]?>" uk-toggle><img src="<?=$subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
                                         </td>
                                         <td class="uk-padding-small">
-                                          <?=$subloc["title"]?>
+                                          <?php echo $subloc["title"]?>
                                         </td>
                                     </tr>
                                   <?php }} ?>
@@ -148,10 +152,10 @@ ini_set('display_errors', 1);
                                   ?>
                                     <tr class="uk-padding-remove">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
-                                          <a href="#location<?=$subloc["id"]?>" uk-toggle><img src="<?=$subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
                                         </td>
                                         <td class="uk-padding-small">
-                                          <?=$subloc["title"]?>
+                                          <?php echo $subloc["title"]?>
                                         </td>
                                     </tr>
                                   <?php }} ?>
@@ -159,6 +163,25 @@ ini_set('display_errors', 1);
                             </table>
                           </div>
                       </li>
+                  </ul>
+                <?php } ?>
+                <?php
+                  unset($items);
+                  $items = array();
+
+                  foreach ($objects as $object){
+                    if ($object["location"] == $location["id"]){
+                      array_push($items, $object);
+                    }
+                  }
+
+                  if (!empty($items)) {
+                ?>
+                  <p class="uk-text-uppercase uk-text-bold">Objects in this Location</p>
+                  <ul>
+                    <?php foreach ($items as $item){
+                      echo "<li>".$item["title"]."</li>";
+                    } ?>
                   </ul>
                 <?php } ?>
               </div>

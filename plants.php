@@ -92,28 +92,28 @@ ini_set('display_errors', 1);
                   <p class="uk-padding-remove-top uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Type of Plant</p>
                   <?php foreach ($plant_types as $type){ ?>
                     <div class="uk-width-small uk-float-left">
-                      <input type="checkbox" id="type-<?=$type["id"]?>" class="filter-checkbox"><label><?=$type["name"]?></label>
+                      <input type="checkbox" id="type-<?php echo $type["id"]?>" class="filter-checkbox"><label><?php echo $type["name"]?></label>
                     </div>
                   <?php } ?>
                   <div class="uk-clearfix"></div>
                   <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Primary Color</p>
                   <?php foreach ($plant_colors as $color){ ?>
                     <div class="uk-width-small uk-float-left">
-                      <input type="checkbox" id="color-<?=$color["id"]?>" class="filter-checkbox"><label><?=$color["name"]?></label>
+                      <input type="checkbox" id="color-<?php echo $color["id"]?>" class="filter-checkbox"><label><?php echo $color["name"]?></label>
                     </div>
                   <?php } ?>
                   <div class="uk-clearfix"></div>
                   <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Location</p>
                   <?php foreach ($locations as $location){ ?>
                     <div class="uk-width-medium uk-float-left">
-                      <input type="checkbox" id="location-<?=$location["id"]?>" class="filter-checkbox"><label><?=$location["name"]?></label>
+                      <input type="checkbox" id="location-<?php echo $location["id"]?>" class="filter-checkbox"><label><?php echo $location["name"]?></label>
                     </div>
                   <?php } ?>
                   <div class="uk-clearfix"></div>
                   <p class="uk-text-bold uk-text-uppercase uk-margin-remove-bottom">Season</p>
                   <?php foreach ($plant_seasons as $season){ ?>
                     <div class="uk-width-small uk-float-left">
-                      <input type="checkbox" id="season-<?=$season["id"]?>" class="filter-checkbox"><label><?=$season["name"]?></label>
+                      <input type="checkbox" id="season-<?php echo $season["id"]?>" class="filter-checkbox"><label><?php echo $season["name"]?></label>
                     </div>
                   <?php } ?>
               </div>
@@ -146,7 +146,7 @@ ini_set('display_errors', 1);
               $class_season = $class_season."season-".$season." ";
             }
         ?>
-            <div class="plant-card <?=$class_type?> <?=$class_location?> <?=$class_color?> <?=$class_season?>">
+            <div class="plant-card <?php echo $class_type?> <?php echo $class_location?> <?php echo $class_color?> <?php echo $class_season?>">
                 <div class="uk-card uk-card-default uk-card-body uk-width-small mv-plant-image uk-text-small uk-padding-small">
                   <a href="#plant<?php echo $plant["id"]?>" uk-toggle><img src="<?php echo prefixURL($plant["main_photo"],'sml_')?>"></a>
                   <p class="uk-padding-remove"><?php echo $plant["comon_name"]?></p>

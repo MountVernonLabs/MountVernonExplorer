@@ -22,9 +22,9 @@
               ?>
               <tr class="uk-padding-small">
                   <td class="uk-text-bold uk-padding-small">
-                    <a href="#tour<?php echo $tour["id"]?>" uk-toggle><?=$tour["name"]?></a>
+                    <a href="#tour<?php echo $tour["id"]?>" uk-toggle><?php echo $tour["name"]?></a>
                   </td>
-                  <td class="uk-padding-small"><?=$tour["duration"]?> minutes</td>
+                  <td class="uk-padding-small"><?php echo $tour["duration"]?> minutes</td>
               </tr>
               <?php  } ?>
           </tbody>
@@ -45,10 +45,10 @@
                        foreach ($audio as $clip){
                      ?>
                       <li class="uk-open">
-                          <h3 class="uk-accordion-title"><?=$clip["name"]?></h3>
+                          <h3 class="uk-accordion-title"><?php echo $clip["name"]?></h3>
                           <div class="uk-accordion-content">
-                            <audio controls src="<?=$clip["clip"]?>">
-                              <a href="<?=$clip["clip"]?>"><?=$clip["name"]?></a>
+                            <audio controls src="<?php echo $clip["clip"]?>">
+                              <a href="<?php echo $clip["clip"]?>"><?php echo $clip["name"]?></a>
                             </audio>
                           </div>
                       </li>
