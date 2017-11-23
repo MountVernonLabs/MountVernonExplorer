@@ -75,7 +75,19 @@
                               <audio controls src="<?php echo $clip["clip"]?>">
                                 <a href="<?php echo $clip["clip"]?>"><?php echo $clip["name"]?></a>
                               </audio>
-                              <p class="uk-height-medium"><iframe src="//www.mountvernon.org/site/turn-by-turn/point/?slat=<?=$clip["latitude"]?>&slong=<?=$clip["longitude"]?>" frameborder="0" marginwidth="0" marginheight="0" width="100%" class="uk-height-medium"></iframe></p>
+                                <?php if ($clip["image"] != ""){ ?>
+                                  <img src="<?=$clip["image"]?>">
+                                <?php } ?>
+                                <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                                    <li><a href="#">Map</a></li>
+                                    <li><a href="#">Transcript</a></li>
+                                </ul>
+
+                                <ul class="uk-switcher uk-margin">
+                                    <li><p class="uk-height-medium"><iframe src="//www.mountvernon.org/site/turn-by-turn/point/?slat=<?=$clip["latitude"]?>&slong=<?=$clip["longitude"]?>" frameborder="0" marginwidth="0" marginheight="0" width="100%" class="uk-height-medium"></iframe></p></li>
+                                    <li><?php echo $clip["transcript"]?></li>
+                                </ul>
+
                             </div>
                           </li>
                         <?php  } ?>
