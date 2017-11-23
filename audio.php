@@ -39,7 +39,7 @@
               <div class="uk-padding-large">
                   <h3><?php echo $tour["name"]?></h3>
 
-                  <div class="uk-position-relative uk-visible-toggle uk-height-large" uk-slideshow>
+                  <div class="uk-position-relative uk-visible-toggle" uk-slideshow>
 
                     <div class="uk-padding-remove" uk-slideshow>
 
@@ -48,9 +48,26 @@
                       <span class="uk-text-uppercase uk-text-bold">Next Stop</span>
                       <ul class="uk-slideshow-items uk-padding-small">
                         <?php
-                           $media = file_get_contents("https://www.mountvernon.org/site/api/audio-tours/".$tour["id"]);
-                           $audio = json_decode($media, true);
+                           $audio_data = file_get_contents("https://www.mountvernon.org/site/api/audio-tours/".$tour["id"]);
+                           $audio = json_decode($audio_data, true);
+
+                           $locations_data = file_get_contents("http://www.mountvernon.org/site/api/locations");
+                           $locations = json_decode($locations_data, true);
+
                            foreach ($audio as $clip){
+                             if ($clip["alt_location"] == ""){
+                               foreach ($locations as $loc){
+                                 if ($loc["id"] == $clip["location"]){
+                                   $clip["latitude"] = $loc["latitude"];
+                                   $clip["longitude"] = $loc["longitude"];
+                                 }
+                               }
+                             } else {
+                               $loc = json_decode($clip["alt_location"], true);
+                               $clip["latitude"] = $loc["latitude"];
+                               $clip["longitude"] = $loc["longitude"];
+                             }
+
                          ?>
                           <li>
                             <div class="uk-card uk-card-default uk-card-body">
@@ -58,6 +75,7 @@
                               <audio controls src="<?php echo $clip["clip"]?>">
                                 <a href="<?php echo $clip["clip"]?>"><?php echo $clip["name"]?></a>
                               </audio>
+                              <p class="uk-height-medium"><iframe src="//www.mountvernon.org/site/turn-by-turn/point/?slat=<?=$clip["latitude"]?>&slong=<?=$clip["longitude"]?>" frameborder="0" marginwidth="0" marginheight="0" width="100%" class="uk-height-medium"></iframe></p>
                             </div>
                           </li>
                         <?php  } ?>
