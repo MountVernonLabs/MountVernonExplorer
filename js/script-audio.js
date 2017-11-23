@@ -5,3 +5,9 @@ $(function(){
         });
     });
 });
+
+$(".uk-close-large").bind( "click", function() {
+  $("audio").each(function(index, audio) {
+      audio.pause();
+  });
+});
