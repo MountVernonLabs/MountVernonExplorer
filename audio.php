@@ -45,7 +45,7 @@
 
                       <a class="uk-slidenav" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                       <a class="uk-slidenav" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
-
+                      <span class="uk-text-uppercase uk-text-bold">Next Stop</span>
                       <ul class="uk-slideshow-items uk-padding-small">
                         <?php
                            $media = file_get_contents("https://www.mountvernon.org/site/api/audio-tours/".$tour["id"]);
