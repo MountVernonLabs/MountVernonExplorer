@@ -131,7 +131,7 @@ var view = new ol.View({
       $.each(mvloc, function(i, field){
           if (field.type != "room" && field.type != "gallery") {
             // Populate the list
-            var thisitem = "<tr class=\"uk-padding-remove type-all type-"+field.type+"\">";
+            var thisitem = "<tr uk-toggle=\"target: #location"+field.id+"\" class=\"uk-padding-remove type-all type-"+field.type+"\">";
             thisitem = thisitem+"<td class=\"uk-padding-small uk-padding-remove-right mv-list-image\"><a href=\"#location"+field.id+"\" uk-toggle><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></a></td>";
             thisitem = thisitem+"<td class=\"uk-text-bold uk-padding-small\">"+field.title+"</td>";
             if (field.distance > 1){

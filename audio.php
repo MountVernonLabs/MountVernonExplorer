@@ -78,7 +78,7 @@
                                 <?php if ($clip["image"] != ""){ ?>
                                   <img src="<?=$clip["image"]?>">
                                 <?php } ?>
-                                <ul class="uk-subnav uk-subnav-pill" uk-switcher>
+                                <ul class="uk-subnav uk-subnav-pill uk-margin-auto" uk-switcher>
                                     <li><a href="#">Map</a></li>
                                     <li><a href="#">Transcript</a></li>
                                 </ul>

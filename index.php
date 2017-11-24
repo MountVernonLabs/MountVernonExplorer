@@ -61,7 +61,7 @@ ini_set('display_errors', 1);
                   <h3><?php echo $location["title"]?></h3>
 
                   <div class="uk-height-max-medium" style="height: 400px;">
-                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 400px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
+                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 300px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
                         <ul class="uk-slideshow-items">
                             <li>
                               <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
@@ -109,7 +109,7 @@ ini_set('display_errors', 1);
                                   <?php foreach ($rooms as $subloc){
                                         if ($subloc["floor"] == "First"){
                                   ?>
-                                    <tr class="uk-padding-remove">
+                                    <tr class="uk-padding-remove" uk-toggle="target: #location<?php echo $subloc["id"]?>">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
                                           <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
                                         </td>
@@ -193,6 +193,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.43"></script>
+    <script src="./js/script.js?v2.44"></script>
   </body>
 </html>

@@ -29,8 +29,26 @@
 
             <li class="uk-nav-divider"></li>
             <li class="uk-margin-small-top">
+              <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: nut"></span>
+              <a href="<?php echo $base_url?>/eat" class="uk-padding-remove-top">Where to Eat</a>
+            </li>
+
+            <li class="uk-nav-divider"></li>
+            <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: bolt"></span>
               <a href="<?php echo $base_url?>/plants" class="uk-padding-remove-top">Plant Finder</a>
+            </li>
+
+            <li class="uk-nav-divider"></li>
+            <li class="uk-margin-small-top">
+              <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: instagram"></span>
+              <a href="<?php echo $base_url?>/social" class="uk-padding-remove-top">Follow Us on Social</a>
+            </li>
+
+            <li class="uk-nav-divider"></li>
+            <li class="uk-margin-small-top">
+              <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: mail"></span>
+              <a href="<?php echo $base_url?>/contact" class="uk-padding-remove-top">Contact Us</a>
             </li>
 
         </ul>
