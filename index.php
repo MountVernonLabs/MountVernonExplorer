@@ -84,6 +84,7 @@ ini_set('display_errors', 1);
                         <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
                     </div>
                   </div>
+                  <p lat="<?=$location["latitude"]?>" long="<?=$location["longitude"]?>" class="directions uk-text-uppercase uk-text-bold"><span uk-icon="icon: plus-circle"></span> Get Directions</p>
                   <p><?php echo $location["description"]?></p>
                   <?php
                     unset($rooms);
@@ -192,6 +193,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.42"></script>
+    <script src="./js/script.js?v2.43"></script>
   </body>
 </html>

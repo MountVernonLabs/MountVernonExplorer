@@ -8,9 +8,12 @@ function filterExplorer(){
   }
 }
 
-
 $("#explore-filter").on('change',function(){
    filterExplorer();
+});
+
+$( ".directions" ).bind( "click", function() {
+  $(this).html( '<p class="uk-text-bold uk-text-uppercase">Directions</p><iframe src="//www.mountvernon.org/site/turn-by-turn/?slat='+window.latitude+'&slong='+window.longitude+'&elat='+$(this).attr("lat")+'&elong='+$(this).attr("long")+'" width="100%; height="250"></iframe>');
 });
 
 // Setup the Open Street Map Viz
@@ -107,6 +110,8 @@ var view = new ol.View({
               mvloc[i]["distance"] = calculateDistance(cord[1],cord[0],mvloc[i]["latitude"],mvloc[i]["longitude"],"N");
       }
 
+      window.longitude = cord[0];
+      window.latitude = cord[1];
       // calculate distance from Mount Vernon and if you are more than 4 miles out show a welcome splash screen
       var distanceaway = calculateDistance(cord[1],cord[0],38.71028,-77.08623,"N");
       //$('#miles').text("You are currently "+Math.round(distanceaway * 10) / 10+" miles from Mount Vernon.");
