@@ -22,7 +22,7 @@
               ?>
               <tr class="uk-padding-small uk-padding-remove-bottom" uk-toggle="target: #tour<?php echo $tour["id"]?>">
                   <td class="uk-padding-small uk-padding-remove-right mv-list-image uk-padding-remove-bottom">
-                    <img class="uk-thumbnail-mini" src="<?php echo $tour["image"]?>">
+                    <img class="uk-thumbnail-mini" src="<?php echo prefixURL($tour["image"], "sml_")?>">
                   </td>
                   <td class="uk-text-bold uk-padding-small">
                     <?php echo $tour["name"]?>
