@@ -12,7 +12,7 @@
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
 
-      <h4 class="uk-text-uppercase uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove">Today's Events</h4>
+      <h4 class="uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove">Today's Events</h4>
 
       <?php
       $all = array();
@@ -77,7 +77,7 @@
         </thead>
       <tbody>
 
-        <?php 
+        <?php
         // Print out newly sorted array
         while (list($key, $event) = each($all)) {
             $future_date = new DateTime(date('Y-m-d h:i a', strtotime(date('Y-m-d')." ".$event["time"])));
