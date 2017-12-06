@@ -20,9 +20,9 @@
                 $tours = json_decode($json, true);
                 foreach ($tours as $tour){
               ?>
-              <tr class="uk-padding-small">
+              <tr class="uk-padding-small" uk-toggle="target: #tour<?php echo $tour["id"]?>">
                   <td class="uk-text-bold uk-padding-small">
-                    <a href="#tour<?php echo $tour["id"]?>" uk-toggle><?php echo $tour["name"]?></a>
+                    <?php echo $tour["name"]?>
                   </td>
                   <td class="uk-padding-small"><?php echo $tour["duration"]?> minutes</td>
               </tr>
@@ -78,15 +78,9 @@
                                 <?php if ($clip["image"] != ""){ ?>
                                   <img src="<?=$clip["image"]?>">
                                 <?php } ?>
-                                <ul class="uk-subnav uk-subnav-pill uk-margin-auto" uk-switcher>
-                                    <li><a href="#">Map</a></li>
-                                    <li><a href="#">Transcript</a></li>
-                                </ul>
+                                <p id="directions<?php echo $clip["id"]?>" lat="<?=$clip["latitude"]?>" long="<?=$clip["longitude"]?>" class="directions uk-text-uppercase uk-text-bold"><span uk-icon="icon: plus-circle"></span> Get Directions</p>
 
-                                <ul class="uk-switcher uk-margin">
-                                    <li><p class="uk-height-medium"><iframe src="//www.mountvernon.org/site/turn-by-turn/point/?slat=<?=$clip["latitude"]?>&slong=<?=$clip["longitude"]?>" frameborder="0" marginwidth="0" marginheight="0" width="100%" class="uk-height-medium"></iframe></p></li>
-                                    <li><?php echo $clip["transcript"]?></li>
-                                </ul>
+                                <p><?php echo $clip["transcript"]?></p>
 
                             </div>
                           </li>
@@ -103,6 +97,6 @@
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script-audio.js?v1.2"></script>
+    <script src="./js/script-audio.js?v1.44"></script>
   </body>
 </html>
