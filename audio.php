@@ -20,11 +20,14 @@
                 $tours = json_decode($json, true);
                 foreach ($tours as $tour){
               ?>
-              <tr class="uk-padding-small" uk-toggle="target: #tour<?php echo $tour["id"]?>">
+              <tr class="uk-padding-small uk-padding-remove-bottom" uk-toggle="target: #tour<?php echo $tour["id"]?>">
+                  <td class="uk-padding-small uk-padding-remove-right mv-list-image uk-padding-remove-bottom">
+                    <img class="uk-thumbnail-mini" src="<?php echo $tour["image"]?>">
+                  </td>
                   <td class="uk-text-bold uk-padding-small">
                     <?php echo $tour["name"]?>
                   </td>
-                  <td class="uk-padding-small"><?php echo $tour["duration"]?> minutes</td>
+                  <td class="uk-padding-small"><?php echo $tour["duration"]?> mins</td>
               </tr>
               <?php  } ?>
           </tbody>
