@@ -12,17 +12,31 @@
     <div class="uk-container uk-padding-remove">
       <?php include "includes/nav.php"; ?>
 
-      <h4 class="uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove">Today's Events</h4>
-
       <?php
       $all = array();
       $now = new DateTime();
       date_default_timezone_set('America/New_York');
       // Use the line below to test other times
       //$now = new DateTime('2017-08-14 10:00:00');
+      // set time to midnight
+      // $now->setTime(0,0);
+
+      // check if after 5pm
+      $fivePm = new DateTime();
+      $fivePm->setTime(17,0); // 5:00 PM (military time)
+      $todayOrTomorrow = "<h4 class=\"uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove\">Today's Events</h4>";
+
+      if ( $now > $fivePm ){
+        $now->setTime(0,0);
+        $json = file_get_contents('http://www.mountvernon.org/site/api/events-tomorrow');
+        $todayOrTomorrow = "<p class=\"uk-padding-small uk-padding-remove-top uk-margin-remove-top uk-margin-remove\">There are no more daytime events to see today. Please <a class=\"uk-link\" href=\"http://www.mountvernon.org/calendar\">view our full calendar</a> or see tomorrow's schedule below.</p><h4 class=\"uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove\">Tomorrow's Events</h4>";
+      }
+
+      else {
+        $json = file_get_contents('http://www.mountvernon.org/site/api/events-today');
+      }
 
       // Read today's events from the API
-      $json = file_get_contents('http://www.mountvernon.org/site/api/events-today');
       $data = json_decode($json, true);
 
       // Store a list of locations
@@ -66,7 +80,10 @@
       }
       usort($all, "cmp");
 
+      echo "$todayOrTomorrow";
+
       ?>
+
       <table class="uk-table uk-table-striped uk-table-small uk-text-small">
         <thead>
             <tr>
@@ -77,7 +94,7 @@
         </thead>
       <tbody>
 
-        <?php
+        <?
         // Print out newly sorted array
         while (list($key, $event) = each($all)) {
             $future_date = new DateTime(date('Y-m-d h:i a', strtotime(date('Y-m-d')." ".$event["time"])));
@@ -107,14 +124,13 @@
               echo "$ticketinfo";
               echo "</div></div></div>";
             }
-
         }
+
         ?>
       </tbody>
       </table>
+      <a href="http://www.mountvernon.org/calendar" target="_blank"><button class="uk-button uk-button-primary uk-margin uk-margin-left">VIEW FULL CALENDAR</button></a>
     </div>
-
-    <a href="http://www.mountvernon.org/calendar" target="_blank"><button class="uk-button uk-margin-top uk-margin-small-left uk-button-primary">VIEW FULL CALENDAR</button></a>
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
