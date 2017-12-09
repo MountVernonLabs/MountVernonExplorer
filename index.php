@@ -34,6 +34,10 @@ ini_set('display_errors', 1);
         </p>
         <div id="locations" class="uk-padding-small uk-padding-remove-top">
           <table class="uk-table uk-table-divider uk-table-small uk-table-justify uk-padding-remove-top">
+            <div id="loading" class="uk-padding-large uk-align-center">
+              <div uk-spinner class="uk-align-center"></div>
+              <p class="uk-align-center">Finding your location and loading things to see...</p>
+            </div>
             <tbody id="locations-list" class="uk-padding-small">
               <!-- Locations get populated here -->
             </tbody>
@@ -193,6 +197,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.44"></script>
+    <script src="./js/script.js?v2.45"></script>
   </body>
 </html>

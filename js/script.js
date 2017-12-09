@@ -128,6 +128,7 @@ var view = new ol.View({
 
       // Display nearby locations in the UI
       $("#locations-list").html("");
+      $("#loading").hide();
       $.each(mvloc, function(i, field){
           if (field.type != "room" && field.type != "gallery") {
             // Populate the list
