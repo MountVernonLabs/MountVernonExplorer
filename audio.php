@@ -49,7 +49,8 @@
                       <a class="uk-slidenav" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
                       <a class="uk-slidenav" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
                       <span class="uk-text-uppercase uk-text-bold">Next Stop</span>
-                      <ul class="uk-slideshow-items uk-padding-small">
+                      <hr class="uk-divider-icon uk-margin-small">
+                      <ul class="uk-slideshow-items" uk-height-viewport="min-height: 800">
                         <?php
                            $audio_data = file_get_contents("https://www.mountvernon.org/site/api/audio-tours/".$tour["id"]);
                            $audio = json_decode($audio_data, true);
@@ -73,17 +74,20 @@
 
                          ?>
                           <li>
-                            <div class="uk-card uk-card-default uk-card-body">
-                              <h4><?php echo $clip["name"]?></h4>
+                            <div class="uk-padding-remove">
+                              <h4 class="uk-margin-small"><?php echo $clip["name"]?></h4>
+                              <?php if ($clip["image"] != ""){ ?>
+                                <p class="uk-margin-small"><img src="<?=$clip["image"]?>" class="uk-width-medium"></p>
+                              <?php } ?>
+                              <p id="directions<?php echo $clip["id"]?>" lat="<?=$clip["latitude"]?>" long="<?=$clip["longitude"]?>" class="directions uk-text-uppercase uk-text-bold uk-margin-small"><span uk-icon="icon: plus-circle"></span> Get Directions</p>
+
                               <audio controls src="<?php echo $clip["clip"]?>">
                                 <a href="<?php echo $clip["clip"]?>"><?php echo $clip["name"]?></a>
                               </audio>
-                                <?php if ($clip["image"] != ""){ ?>
-                                  <img src="<?=$clip["image"]?>">
-                                <?php } ?>
-                                <p id="directions<?php echo $clip["id"]?>" lat="<?=$clip["latitude"]?>" long="<?=$clip["longitude"]?>" class="directions uk-text-uppercase uk-text-bold"><span uk-icon="icon: plus-circle"></span> Get Directions</p>
+                                <div style="overflow: scroll;" class="uk-height-small uk-margin-small-top">
 
-                                <p><?php echo $clip["transcript"]?></p>
+                                  <p><?php echo $clip["transcript"]?></p>
+                                </div>
 
                             </div>
                           </li>
