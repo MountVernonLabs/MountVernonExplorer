@@ -19,12 +19,12 @@
   height: 100%;
 }
 .mv-list-image {
-  width: 40%
+  width: 125px;
 }
 .mv-list-image img {
   width: 100%;
   object-fit: cover;
-  max-height: 70px;
+  max-height: 80px;
 }
 .mv-plant-image img {
   width: 150px;
@@ -32,7 +32,7 @@
   height: 70px;
 }
 #locations {
-  max-width: 450px;
+  max-width: 400px;
 }
 .mv-menu {
   background: #002C3D;

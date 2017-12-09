@@ -13,7 +13,7 @@
       <?php include "includes/nav.php"; ?>
 
       <h4 class="uk-text-uppercase uk-padding-small uk-padding-remove-bottom uk-padding-remove-top uk-margin-remove-top uk-margin-remove">Audio Tours</h4>
-      <table class="uk-table">
+      <table class="uk-table" id="locations">
           <tbody>
              <?php
                 $json = file_get_contents("https://www.mountvernon.org/site/api/audio-tours");
@@ -21,7 +21,7 @@
                 foreach ($tours as $tour){
               ?>
               <tr class="uk-padding-small uk-padding-remove-bottom" uk-toggle="target: #tour<?php echo $tour["id"]?>">
-                  <td class="uk-padding-small uk-padding-remove-right mv-list-image uk-padding-remove-bottom">
+                  <td class="uk-padding-small uk-padding-remove-right mv-list-image uk-padding-remove-bottom uk-width-small">
                     <img class="uk-thumbnail-mini" src="<?php echo prefixURL($tour["image"], "sml_")?>">
                   </td>
                   <td class="uk-text-bold uk-padding-small">
