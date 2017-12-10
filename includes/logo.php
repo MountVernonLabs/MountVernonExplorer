@@ -1,3 +1,3 @@
 <div class="logo">
-  <img src="./img/mv-logo-color.png">
+  <a href="<?php echo $base_url?>"><img src="./img/mv-logo-color.png"></a>
 </div>

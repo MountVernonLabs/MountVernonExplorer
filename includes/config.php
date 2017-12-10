@@ -1,5 +1,5 @@
 <?php
 
-$base_url = "/site/explorer";
+$base_url = "https://www.mountvernon.org/site/explorer";
 
 ?>
