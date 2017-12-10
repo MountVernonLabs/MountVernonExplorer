@@ -69,7 +69,7 @@ ini_set('display_errors', 1);
   </head>
   <body>
     <div id="sponsor" class="uk-background-cover uk-flex uk-flex-center uk-flex-middle" style="background-image: url(https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg);" uk-height-viewport>
-        <p>Hello</p>
+        <p>Plant Finder</p>
     </div>
     <!-- Header -->
     <?php include "includes/logo.php"; ?>

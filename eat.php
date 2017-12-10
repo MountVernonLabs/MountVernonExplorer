@@ -20,7 +20,7 @@ ini_set('display_errors', 1);
       <h3 class="uk-padding-remove-top uk-margin-remove-top">Where to Eat</h3>
 
       <div class="uk-inline">
-          <img src="http://s3.amazonaws.com/mtv-main-assets/files/pages/shrimp-grits-web-4.jpg" alt="">
+          <img src="//s3.amazonaws.com/mtv-main-assets/files/pages/shrimp-grits-web-4.jpg" alt="">
           <div class="uk-overlay-primary uk-position-cover"></div>
             <div class="uk-overlay uk-position-center uk-light">
             <h3 class="uk-padding-remove-top uk-margin-remove-top">Mount Vernon Inn</h3>
@@ -30,7 +30,7 @@ ini_set('display_errors', 1);
       </div>
 
       <div class="uk-inline uk-margin-top uk-margin-bottom">
-          <img src="http://s3.amazonaws.com/mtv-main-assets/files/pages/veggiepattielandscape.jpg" alt="">
+          <img src="//s3.amazonaws.com/mtv-main-assets/files/pages/veggiepattielandscape.jpg" alt="">
           <div class="uk-overlay-primary uk-position-cover"></div>
             <div class="uk-overlay uk-position-center uk-light">
             <h3 class="uk-padding-remove-top uk-margin-remove-top">Food Court Pavillion</h3>
