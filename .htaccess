@@ -1,6 +1,12 @@
+RewriteEngine Off
 RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^([^\.]+)$ $1.php [NC]
 
+RewriteCond %{ENV:HTTPS} !=on [NC]
 RewriteCond %{HTTPS} off
-RewriteRule ^(|audio|today|contact|eat|plants|shuttles|social|index) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+RewriteRule ^(|audio|today|contact|eat|plants|shuttles|social|index) https://%{HTTP_HOST}%{REQUEST_URI} [NC,R=301,L]
+
+RewriteCond %{ENV:HTTPS} !=on [NC]
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)/site/explorer/ https://%{HTTP_HOST}%{REQUEST_URI} [NC,R=301,L]
