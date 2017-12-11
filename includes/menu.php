@@ -6,7 +6,7 @@
 
             <li class="uk-margin-small-top">
               <span class="uk-margin-small-right uk-icon uk-float-left" uk-icon="icon: world"></span>
-              <a href="<?php echo $base_url?>" class="uk-padding-remove-top">Explorer</a>
+              <a href="<?php echo $base_url?>/" class="uk-padding-remove-top">Explorer</a>
             </li>
 
             <li class="uk-nav-divider"></li>
