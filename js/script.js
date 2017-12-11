@@ -16,6 +16,12 @@ $( ".directions" ).bind( "click", function() {
   $(this).html( '<p class="uk-text-bold uk-text-uppercase">Directions</p><iframe src="//www.mountvernon.org/site/turn-by-turn/?slat='+window.latitude+'&slong='+window.longitude+'&elat='+$(this).attr("lat")+'&elong='+$(this).attr("long")+'" width="100%; height="250"></iframe>');
 });
 
+function prefixURL(url,prefix){
+  var filename = url.substring(url.lastIndexOf('/')+1);
+  var newurl = url.slice(0, -filename.length) + prefix + filename;
+  return newurl;
+}
+
 // Setup the Open Street Map Viz
 var projection = ol.proj.get('EPSG:3857');
 var view = new ol.View({
@@ -133,7 +139,7 @@ var view = new ol.View({
           if (field.type != "room" && field.type != "gallery") {
             // Populate the list
             var thisitem = "<tr uk-toggle=\"target: #location"+field.id+"\" class=\"uk-padding-remove type-all type-"+field.type+"\">";
-            thisitem = thisitem+"<td class=\"uk-padding-small uk-padding-remove-right mv-list-image\"><a href=\"#location"+field.id+"\" uk-toggle><img class=\"uk-thumbnail-mini\" src=\"" + field.image + "\"></a></td>";
+            thisitem = thisitem+"<td class=\"uk-padding-small uk-padding-remove-right mv-list-image\"><a href=\"#location"+field.id+"\" uk-toggle><img class=\"uk-thumbnail-mini\" src=\"" + prefixURL(field.image,"sml_") + "\"></a></td>";
             thisitem = thisitem+"<td class=\"uk-text-bold uk-padding-small\">"+field.title+"</td>";
             if (field.distance > 1){
               thisitem = thisitem+"<td class=\"uk-text-small uk-text-center\"><span class=\"uk-text-bold\">"+Math.round(field.distance * 10) / 10+"</span><br>miles</td>";

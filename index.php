@@ -69,7 +69,7 @@ ini_set('display_errors', 1);
                         <ul class="uk-slideshow-items">
                             <li>
                               <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
-                                <img src="<?php echo $location["image"] ?>" alt="" uk-cover>
+                                <img src="<?php echo prefixURL($location["image"], "sml_") ?>" alt="" uk-cover>
                               </div>
                             </li>
                               <?php
@@ -115,7 +115,7 @@ ini_set('display_errors', 1);
                                   ?>
                                     <tr class="uk-padding-remove" uk-toggle="target: #location<?php echo $subloc["id"]?>">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
-                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo prefixURL($subloc["image"],"sml_") ?>" class="uk-thumbnail-mini"></a>
                                         </td>
                                         <td class="uk-padding-small">
                                           <?php echo $subloc["title"]?>
@@ -136,7 +136,7 @@ ini_set('display_errors', 1);
                                   ?>
                                     <tr class="uk-padding-remove">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
-                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo prefixURL($subloc["image"],"sml_") ?>" class="uk-thumbnail-mini"></a>
                                         </td>
                                         <td class="uk-padding-small">
                                           <?php echo $subloc["title"]?>
@@ -157,7 +157,7 @@ ini_set('display_errors', 1);
                                   ?>
                                     <tr class="uk-padding-remove">
                                         <td class="uk-padding-small uk-padding-remove-right  uk-padding-remove-left uk-padding-remove-top mv-list-image">
-                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo $subloc["image"]?>" class="uk-thumbnail-mini"></a>
+                                          <a href="#location<?php echo $subloc["id"]?>" uk-toggle><img src="<?php echo prefixURL($subloc["image"], "sml_") ?>" class="uk-thumbnail-mini"></a>
                                         </td>
                                         <td class="uk-padding-small">
                                           <?php echo $subloc["title"]?>
@@ -197,6 +197,6 @@ ini_set('display_errors', 1);
 
     <!-- Menu -->
     <?php include "includes/menu.php"; ?>
-    <script src="./js/script.js?v2.45"></script>
+    <script src="./js/script.js?v2.46"></script>
   </body>
 </html>
