@@ -30,7 +30,41 @@ ini_set('display_errors', 1);
             <option value="service">Service Desks</option>
             <option value="project">Restoration Projects</option>
           </select>
-          <a uk-icon="icon: question" class="uk-float-right"></a>
+          <a uk-icon="icon: question" uk-toggle="target: #tips" class="uk-float-right"></a>
+
+
+          <!-- This is the tips modal -->
+          <div id="tips" class="uk-modal-full" uk-modal>
+            <div class="uk-modal-dialog" uk-height-viewport>
+              <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
+              <div class="uk-padding-large">
+                <h2 class="uk-modal-title">Visitor Information</h2>
+                <h3>In case of emergencies...</h3>
+                <p>Please <strong>notify</strong> a security officer located at the Mansion Circle or Mount Vernon staff located near the Food court pavillion. <strong>First aid stations</strong> are also available at the North Lane restrooms and at the exit desk outside the Museum & Education center.</p>
+
+                <p>If you need immediate assistance, you can also <strong>call our emergency response team</strong> at <a href="tel:7037998678" class="uk-link-text">703-799-8678</a>.</p>
+
+                <a class="uk-button uk-button-primary" href="tel:7037998678">Call 703-799-8678</a>
+
+                <p class="uk-text-meta">For non-emergencies, please call information at <a href="tel:7037802000" class="uk-link-text">703-780-2000.</a></p>
+
+                <p>If you have an emergency at the Distillery & Gristmill, please call <strong>911</strong> instead. The address is 5514 Mount ernon Memorial Hwy, Mount Vernon, VA, 22309.</p>
+
+                <h3>Getting Around the Estate</h3>
+                <p>Please note, there are some areas which include a steep incline which may not be accessible to everyone. Please proceed with caution at the <strong>South Lane, Tomb Road,</strong> and <strong>Forest Trail</strong>.
+
+                <p>For safety and security reasons, certain areas are not publically accessible. Please take note of signage and do not step over fences/walls. Do not go onto the sand at the Wharf. Do not go down the road behind the Shuttle Circle.</p>
+
+                <h3>Other Policies and Procedures</h3>
+                <p>Please no outside food or beverages. Bottled water is allowed. Please dispose of chewing gum before entering the historic part of the estate.</p>
+                <p>No backpacks, handguns, knives, or other probited items.</p>
+                <p>No photography inide the Mansion.</p>
+                <p>For their safety, please do feeding or touching the animals.</p>
+                <a href="http://www.mountvernon.org/plan-your-visit/tips-for-your-visit/guidelines/" class="uk-button uk-button-primary">Read all guest rules</a>
+              </div>
+            </div>
+          </div>
+
         </p>
         <div id="locations" class="uk-padding-small uk-padding-remove-top">
           <table class="uk-table uk-table-divider uk-table-small uk-table-justify uk-padding-remove-top">
