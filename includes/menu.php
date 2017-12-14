@@ -1,5 +1,6 @@
 <div id="offcanvas-slide" uk-offcanvas>
     <div class="uk-offcanvas-bar mv-nav mv-menu">
+      <button class="uk-offcanvas-close" type="button" uk-close></button>
         <ul class="uk-nav uk-nav-default">
             <li class="uk-nav-header">Menu</li>
             <li class="uk-nav-divider"></li>
