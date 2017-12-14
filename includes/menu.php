@@ -54,7 +54,7 @@
 
         </ul>
         <p>
-          <a target="_blank" href="http://www.mountvernon.org/tickets/">
+          <a href="http://www.mountvernon.org/tickets/">
             <button class="uk-button uk-button-danger">Buy Tickets</button>
           </a>
         </p>
