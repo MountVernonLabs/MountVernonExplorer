@@ -72,3 +72,10 @@
 .uk-active a {
   background: #006160 !important;
 }
+
+.uk-button-primary {
+  background-color: #bf2b45 !important;
+}
+.uk-button-primary:hover {
+  background-color: #8D2838 !important;
+}
