@@ -126,11 +126,11 @@ ini_set('display_errors', 1);
               <div class="uk-padding-large">
                   <h3><?php echo $location["title"]?></h3>
 
-                  <div class="uk-height-max-medium" style="height: 400px;">
+                  <div class="uk-height-max-medium">
                     <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 300px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
                         <ul class="uk-slideshow-items">
                             <li>
-                              <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                              <div class="uk-position-cover uk-transform-origin-center-center uk-animation-slide-right">
                                 <img src="<?php echo prefixURL($location["image"], "sml_") ?>" alt="" uk-cover>
                               </div>
                             </li>
@@ -139,7 +139,7 @@ ini_set('display_errors', 1);
                                 foreach ($gallery as $gimage){
                               ?>
                                 <li>
-                                  <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                                  <div class="uk-position-cover uk-transform-origin-center-center uk-animation-slide-right">
                                     <img src="<?php echo prefixURL($gimage["image"], "sml_")?>" alt="" uk-cover>
                                   </div>
                                 </li>

@@ -68,8 +68,8 @@ ini_set('display_errors', 1);
     <?php include "includes/head.php"; ?>
   </head>
   <body>
-    <div id="sponsor" class="uk-background-cover uk-flex uk-flex-center uk-flex-middle" style="background-image: url(https://static.pexels.com/photos/36753/flower-purple-lical-blosso.jpg);" uk-height-viewport>
-        <p>Plant Finder</p>
+    <div id="sponsor" class="uk-background-cover uk-flex uk-flex-center uk-flex-middle" style="background-image: url('img/pf-background.jpg');" uk-height-viewport>
+        <img src="img/pf-brand.png" class="uk-align-center uk-padding-large">
     </div>
     <!-- Header -->
     <?php include "includes/logo.php"; ?>
@@ -164,10 +164,10 @@ ini_set('display_errors', 1);
               <div class="uk-padding-large">
                   <h3><?php echo $plant["comon_name"]?></h3>
                   <div class="uk-height-max-medium" style="height: 400px;">
-                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 400px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
+                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" uk-slideshow="min-height: 300; max-height: 400; autoplay: true">
                         <ul class="uk-slideshow-items">
                             <li>
-                              <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                              <div class="uk-position-cover uk-transform-origin-center-center uk-animation-slide-right">
                                 <img src="<?php echo prefixURL($plant["main_photo"], "sml_")?>" alt="" uk-cover>
                               </div>
                             </li>
@@ -176,7 +176,7 @@ ini_set('display_errors', 1);
                                 foreach ($gallery as $gimage){
                               ?>
                                 <li>
-                                  <div class="uk-position-cover uk-animation-kenburns uk-animation-reverse uk-transform-origin-center-left">
+                                  <div class="uk-position-cover uk-transform-origin-center-center uk-animation-slide-right">
                                     <img src="<?php echo prefixURL($gimage["image"], "sml_")?>" alt="" uk-cover>
                                   </div>
                                 </li>
