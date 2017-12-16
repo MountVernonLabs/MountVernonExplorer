@@ -127,7 +127,7 @@ ini_set('display_errors', 1);
                   <h3><?php echo $location["title"]?></h3>
 
                   <div class="uk-height-max-medium">
-                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" style="height: 300px;" uk-slideshow="min-height: 300; max-height: 600; autoplay: true">
+                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" uk-slideshow="min-height: 200; max-height: 400; autoplay: true">
                         <ul class="uk-slideshow-items">
                             <li>
                               <div class="uk-position-cover uk-transform-origin-center-center uk-animation-slide-right">

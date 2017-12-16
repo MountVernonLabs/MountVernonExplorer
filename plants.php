@@ -163,8 +163,8 @@ ini_set('display_errors', 1);
               <button class="uk-modal-close-full uk-close-large" type="button" uk-close></button>
               <div class="uk-padding-large">
                   <h3><?php echo $plant["comon_name"]?></h3>
-                  <div class="uk-height-max-medium" style="height: 400px;">
-                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" uk-slideshow="min-height: 300; max-height: 400; autoplay: true">
+                  <div class="uk-height-max-medium">
+                    <div class="uk-position-relative uk-visible-toggle uk-light uk-width-large uk-overflow-hidden uk-height-max-medium" uk-slideshow="min-height: 200; max-height: 400; autoplay: true">
                         <ul class="uk-slideshow-items">
                             <li>
                               <div class="uk-position-cover uk-transform-origin-center-center uk-animation-slide-right">
