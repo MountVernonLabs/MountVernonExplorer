@@ -19,6 +19,10 @@ ini_set('display_errors', 1);
 
       <h3 class="uk-padding-remove-top uk-margin-remove-top">Where to Eat</h3>
 
+      <div class="uk-card uk-card-default uk-card-body uk-width-1-1@m">
+        <p class="uk-text-small">PLEASE NOTE: The Food Court Pavilion will be closed for maintenance January 2 through January 14. The Mount Vernon Inn Restaurant will be closed for maintenance January 15 through January 28.</p>
+      </div>
+
       <div class="uk-inline">
           <img src="//s3.amazonaws.com/mtv-main-assets/files/pages/shrimp-grits-web-4.jpg" alt="">
           <div class="uk-overlay-primary uk-position-cover"></div>
